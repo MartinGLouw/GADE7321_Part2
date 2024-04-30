@@ -68,8 +68,6 @@ public class Spawning : MonoBehaviour
 
     private bool IsColumnFull(int column)
     {
-        
-        column -= 1;
 
         for (int row = 0; row < heightOfBoard; row++)
         {
@@ -84,9 +82,7 @@ public class Spawning : MonoBehaviour
 
     private bool UpdateBoardState(int column)
     {
-        
-        column -= 1;
-        
+
         for (int row = 0; row < heightOfBoard; row++)
         {
             if (boardState[column, row] == 0)
@@ -97,7 +93,7 @@ public class Spawning : MonoBehaviour
                 else
                     boardState[column, row] = 2;
 
-                
+
                 Debug.Log("Updated board state" + (column) + " " + (row));
                 return true;
             }
@@ -108,52 +104,81 @@ public class Spawning : MonoBehaviour
 
     private bool CheckWinCondition(int player)
     {
-        for (int i = 0; i < lengthOfBoard; i++)
+        //Check horizontal cells
+        
+        for (int x = 0; x < lengthOfBoard - 6; x++)
         {
-            for (int j = 0; j < heightOfBoard; j++)
+            for (int y = 0; y < heightOfBoard; y++)
             {
-                //Check horizontal cells
-                if (i + 3 < lengthOfBoard &&
-                    boardState[i, j] == player &&
-                    boardState[i + 1, j] == player &&
-                    boardState[i + 2, j] == player &&
-                    boardState[i + 3, j] == player)
-                {
+                if (boardState[x, y] == player &&
+                    boardState[x + 1, y] == player &&
+                    boardState[x + 2, y] == player &&
+                    boardState[x + 3, y] == player)
+                {Debug.Log("win");
+                    
                     return true;
+                    
                 }
 
-                //Check vertical cells
-                if (j + 3 < heightOfBoard &&
-                    boardState[i, j] == player &&
-                    boardState[i, j + 1] == player &&
-                    boardState[i, j + 2] == player &&
-                    boardState[i, j + 3] == player)
-                {
-                    return true;
-                }
-                //Check diagonal cells (bottom left to top right)
-                if (i + 3 < lengthOfBoard && j + 3 < heightOfBoard &&
-                    boardState[i, j] == player &&
-                    boardState[i + 1, j + 1] == player &&
-                    boardState[i + 2, j + 2] == player &&
-                    boardState[i + 3, j + 3] == player)
-                {
-                    return true;
-                }
+            }
+        }
 
-                //Check diagonal cells (top left to bottom right)
-                if (i + 3 < lengthOfBoard && j - 3 >= 0 &&
-                    boardState[i, j] == player &&
-                    boardState[i + 1, j - 1] == player &&
-                    boardState[i + 2, j - 2] == player &&
-                    boardState[i + 3, j - 3] == player)
+        //vertical check
+
+        for (int x = 0; x < lengthOfBoard; x++)
+        {
+            for (int y = 0; y < heightOfBoard-6; y++)
+            {
+                if (boardState[x, y] == player &&
+                    boardState[x, y + 1] == player &&
+                    boardState[x, y + 2] == player &&
+                    boardState[x, y + 3] == player)
                 {
                     return true;
                 }
             }
-        }
 
-       
+
+        }
+        //Diagonal check
+        for (int x = 0; x < lengthOfBoard - 6; x++)
+        {
+            for (int y = 0; y < heightOfBoard - 6; y++)
+            {
+                if (boardState[x, y] == player &&
+                    boardState[x + 1, y + 1] == player &&
+                    boardState[x + 2, y + 2] == player &&
+                    boardState[x + 3, y + 3] == player)
+                {
+                    return true;
+                }
+            }
+
+
+        }
+        //Diagonal check
+        for (int x = 0; x < lengthOfBoard - 6; x++)
+        {
+            for (int y = 0; y < heightOfBoard - 6; y++)
+            {
+                if (boardState[x, y + 3] == player &&
+                    boardState[x + 1, y + 2] == player &&
+                    boardState[x + 2, y + 1] == player &&
+                    boardState[x + 3, y] == player)
+                {
+                    return true;
+                }
+            }
+
+
+        }
         return false;
     }
 }
+    
+
+
+
+    
+
+
