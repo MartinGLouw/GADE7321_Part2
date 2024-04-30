@@ -18,7 +18,7 @@ public class Spawning : MonoBehaviour
     //New variables for board state
     private int[,] boardState;
     private int heightOfBoard = 12;
-    private int lengthOfBoard = 13;
+    private int lengthOfBoard = 12;
 
     private void Start()
     {
@@ -53,9 +53,13 @@ public class Spawning : MonoBehaviour
 
         bool success = UpdateBoardState(ColumnIndex);
 
-        if (!success)
+        if (success)
         {
-            Debug.Log($"Column {ColumnIndex} is full! Cannot spawn more pucks.");
+            int currentPlayer = Player1Turn ? 1 : 2;
+            if (CheckWinCondition(currentPlayer))
+            {
+                Debug.Log($"Player {currentPlayer} wins!");
+            }
         }
 
         yield return new WaitForSeconds(spawnCooldown);
@@ -64,6 +68,9 @@ public class Spawning : MonoBehaviour
 
     private bool IsColumnFull(int column)
     {
+        
+        column -= 1;
+
         for (int row = 0; row < heightOfBoard; row++)
         {
             if (boardState[column, row] == 0)
@@ -77,7 +84,10 @@ public class Spawning : MonoBehaviour
 
     private bool UpdateBoardState(int column)
     {
-        for (int row = heightOfBoard - 1; row >= 0; row--)
+        
+        column -= 1;
+        
+        for (int row = 0; row < heightOfBoard; row++)
         {
             if (boardState[column, row] == 0)
             {
@@ -87,10 +97,63 @@ public class Spawning : MonoBehaviour
                 else
                     boardState[column, row] = 2;
 
+                
+                Debug.Log("Updated board state" + (column) + " " + (row));
                 return true;
             }
         }
 
+        return false;
+    }
+
+    private bool CheckWinCondition(int player)
+    {
+        for (int i = 0; i < lengthOfBoard; i++)
+        {
+            for (int j = 0; j < heightOfBoard; j++)
+            {
+                //Check horizontal cells
+                if (i + 3 < lengthOfBoard &&
+                    boardState[i, j] == player &&
+                    boardState[i + 1, j] == player &&
+                    boardState[i + 2, j] == player &&
+                    boardState[i + 3, j] == player)
+                {
+                    return true;
+                }
+
+                //Check vertical cells
+                if (j + 3 < heightOfBoard &&
+                    boardState[i, j] == player &&
+                    boardState[i, j + 1] == player &&
+                    boardState[i, j + 2] == player &&
+                    boardState[i, j + 3] == player)
+                {
+                    return true;
+                }
+                //Check diagonal cells (bottom left to top right)
+                if (i + 3 < lengthOfBoard && j + 3 < heightOfBoard &&
+                    boardState[i, j] == player &&
+                    boardState[i + 1, j + 1] == player &&
+                    boardState[i + 2, j + 2] == player &&
+                    boardState[i + 3, j + 3] == player)
+                {
+                    return true;
+                }
+
+                //Check diagonal cells (top left to bottom right)
+                if (i + 3 < lengthOfBoard && j - 3 >= 0 &&
+                    boardState[i, j] == player &&
+                    boardState[i + 1, j - 1] == player &&
+                    boardState[i + 2, j - 2] == player &&
+                    boardState[i + 3, j - 3] == player)
+                {
+                    return true;
+                }
+            }
+        }
+
+       
         return false;
     }
 }
