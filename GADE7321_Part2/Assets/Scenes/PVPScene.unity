@@ -174,12 +174,9 @@ MonoBehaviour:
   puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
   puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
   gameManager: {fileID: 1507710631}
-  isSpawning: 0
-  spawnCooldown: 1
-  Player1Turn: 0
-  Player2Turn: 0
-  heightOfBoard: 12
-  lengthOfBoard: 12
+  powerupButton1: {fileID: 0}
+  powerupButton2: {fileID: 0}
+  powerupButton3: {fileID: 0}
 --- !u!65 &9882092
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -252,12 +249,9 @@ MonoBehaviour:
   puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
   puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
   gameManager: {fileID: 1507710631}
-  isSpawning: 0
-  spawnCooldown: 1
-  Player1Turn: 0
-  Player2Turn: 0
-  heightOfBoard: 12
-  lengthOfBoard: 12
+  powerupButton1: {fileID: 0}
+  powerupButton2: {fileID: 0}
+  powerupButton3: {fileID: 0}
 --- !u!65 &41153273
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -634,12 +628,9 @@ MonoBehaviour:
   puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
   puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
   gameManager: {fileID: 1507710631}
-  isSpawning: 0
-  spawnCooldown: 1
-  Player1Turn: 0
-  Player2Turn: 0
-  heightOfBoard: 12
-  lengthOfBoard: 12
+  powerupButton1: {fileID: 0}
+  powerupButton2: {fileID: 0}
+  powerupButton3: {fileID: 0}
 --- !u!65 &550120918
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1014,12 +1005,9 @@ MonoBehaviour:
   puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
   puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
   gameManager: {fileID: 1507710631}
-  isSpawning: 0
-  spawnCooldown: 1
-  Player1Turn: 0
-  Player2Turn: 0
-  heightOfBoard: 12
-  lengthOfBoard: 12
+  powerupButton1: {fileID: 0}
+  powerupButton2: {fileID: 0}
+  powerupButton3: {fileID: 0}
 --- !u!65 &767754978
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1153,12 +1141,9 @@ MonoBehaviour:
   puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
   puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
   gameManager: {fileID: 1507710631}
-  isSpawning: 0
-  spawnCooldown: 1
-  Player1Turn: 0
-  Player2Turn: 0
-  heightOfBoard: 12
-  lengthOfBoard: 12
+  powerupButton1: {fileID: 0}
+  powerupButton2: {fileID: 0}
+  powerupButton3: {fileID: 0}
 --- !u!65 &924044084
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1323,12 +1308,9 @@ MonoBehaviour:
   puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
   puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
   gameManager: {fileID: 1507710631}
-  isSpawning: 0
-  spawnCooldown: 1
-  Player1Turn: 0
-  Player2Turn: 0
-  heightOfBoard: 12
-  lengthOfBoard: 12
+  powerupButton1: {fileID: 0}
+  powerupButton2: {fileID: 0}
+  powerupButton3: {fileID: 0}
 --- !u!65 &1002910736
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1494,12 +1476,9 @@ MonoBehaviour:
   puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
   puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
   gameManager: {fileID: 1507710631}
-  isSpawning: 0
-  spawnCooldown: 1
-  Player1Turn: 0
-  Player2Turn: 0
-  heightOfBoard: 12
-  lengthOfBoard: 12
+  powerupButton1: {fileID: 0}
+  powerupButton2: {fileID: 0}
+  powerupButton3: {fileID: 0}
 --- !u!65 &1079485802
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1572,12 +1551,9 @@ MonoBehaviour:
   puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
   puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
   gameManager: {fileID: 1507710631}
-  isSpawning: 0
-  spawnCooldown: 1
-  Player1Turn: 0
-  Player2Turn: 0
-  heightOfBoard: 12
-  lengthOfBoard: 12
+  powerupButton1: {fileID: 0}
+  powerupButton2: {fileID: 0}
+  powerupButton3: {fileID: 0}
 --- !u!65 &1182367677
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1650,12 +1626,9 @@ MonoBehaviour:
   puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
   puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
   gameManager: {fileID: 1507710631}
-  isSpawning: 0
-  spawnCooldown: 1
-  Player1Turn: 0
-  Player2Turn: 0
-  heightOfBoard: 12
-  lengthOfBoard: 12
+  powerupButton1: {fileID: 0}
+  powerupButton2: {fileID: 0}
+  powerupButton3: {fileID: 0}
 --- !u!65 &1187431058
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1728,12 +1701,9 @@ MonoBehaviour:
   puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
   puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
   gameManager: {fileID: 1507710631}
-  isSpawning: 0
-  spawnCooldown: 1
-  Player1Turn: 0
-  Player2Turn: 0
-  heightOfBoard: 12
-  lengthOfBoard: 12
+  powerupButton1: {fileID: 0}
+  powerupButton2: {fileID: 0}
+  powerupButton3: {fileID: 0}
 --- !u!65 &1364781406
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2014,12 +1984,9 @@ MonoBehaviour:
   puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
   puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
   gameManager: {fileID: 1507710631}
-  isSpawning: 0
-  spawnCooldown: 1
-  Player1Turn: 0
-  Player2Turn: 0
-  heightOfBoard: 12
-  lengthOfBoard: 12
+  powerupButton1: {fileID: 0}
+  powerupButton2: {fileID: 0}
+  powerupButton3: {fileID: 0}
 --- !u!65 &1507309229
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2070,7 +2037,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33810bd15540a874781cb9ae6b42a45b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turn: 0
+  turn: 1
+  ColumnIndex: 0
 --- !u!4 &1507710632
 Transform:
   m_ObjectHideFlags: 0
@@ -2273,12 +2241,9 @@ MonoBehaviour:
   puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
   puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
   gameManager: {fileID: 1507710631}
-  isSpawning: 0
-  spawnCooldown: 1
-  Player1Turn: 0
-  Player2Turn: 0
-  heightOfBoard: 12
-  lengthOfBoard: 12
+  powerupButton1: {fileID: 0}
+  powerupButton2: {fileID: 0}
+  powerupButton3: {fileID: 0}
 --- !u!65 &1890890193
 BoxCollider:
   m_ObjectHideFlags: 0
