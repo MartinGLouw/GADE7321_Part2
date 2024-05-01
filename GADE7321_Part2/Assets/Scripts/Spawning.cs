@@ -9,31 +9,17 @@ public class Spawning : MonoBehaviour
     public GameObject SpawnPoint;
     public GameObject puckblue;
     public GameObject puckred;
+    public GameObject PowerPuck;
     public GameManager gameManager;
-    public GameObject powerupButton1; 
-    public GameObject powerupButton2;
-    public GameObject powerupButton3;
 
-    
-    private bool isSelectingPowerup = false; // Flag for power-up selection 
-    private int powerupIndexSelected = 0;
     private bool isSpawning = false;
     private float spawnCooldown = 1.0f;
 
     private void OnMouseDown()
     {
-        if (isSelectingPowerup) return; // Don't process clicks during power-up selection
-
-        if (!isSpawning && !gameManager.IsColumnFull(ColumnIndex))
+        if (!isSpawning && !gameManager.IsColumnFull(ColumnIndex)) 
         {
-            if (gameManager.GetCurrentPlayerHasPowerups())
-            {
-                ShowPowerupSelectionUI(); 
-            }
-            else
-            {
-                StartCoroutine(SpawnColumn());
-            }
+            StartCoroutine(SpawnColumn());
         }
     }
 
@@ -41,58 +27,25 @@ public class Spawning : MonoBehaviour
     {
         isSpawning = true;
 
-        GameObject puckToSpawn = gameManager.GetCurrentPlayer() == 1 ? puckblue : puckred;
-        Instantiate(puckToSpawn, SpawnPoint.transform.position, Quaternion.identity);
+        // If power-up is active, spawn PowerPuck; otherwise, spawn the current player's puck
+        GameObject puckToSpawn = gameManager.powerPuckActive ? PowerPuck : (gameManager.GetCurrentPlayer() == 1 ? puckblue : puckred);
+        GameObject newPuck = Instantiate(puckToSpawn, SpawnPoint.transform.position, Quaternion.identity);
 
-        if (gameManager.UpdateBoardState(ColumnIndex))
+        // Add the new puck to the gameManager's boardStateObjects
+        gameManager.AddPuckToBoardStateObjects(ColumnIndex, newPuck);
+        bool wasPowerPuckActive = gameManager.powerPuckActive;
+        // Deactivate the power-up after the PowerPuck is spawned
+        gameManager.powerPuckActive = false;
+
+
+        if (gameManager.UpdateBoardState(ColumnIndex, wasPowerPuckActive)) 
         {
             gameManager.CheckWinCondition();
             gameManager.SwitchTurns();
-            gameManager.EndTurn(); // End the turn
         }
+        
 
         yield return new WaitForSeconds(spawnCooldown);
         isSpawning = false;
-    }
-    private void ShowPowerupSelectionUI()
-    {
-        powerupButton1.SetActive(true);
-        powerupButton2.SetActive(true);
-        powerupButton3.SetActive(true);
-        isSelectingPowerup = true;
-    }
-
-    // Call these functions from your power-up button's OnClick event
-    public void SelectPowerup1() 
-    {
-        powerupIndexSelected = 1;
-        UseSelectedPowerup();
-    }
-
-    public void SelectPowerup2()
-    {
-        powerupIndexSelected = 2;
-        UseSelectedPowerup();
-    }
-
-    public void SelectPowerup3()
-    {
-        powerupIndexSelected = 3;
-        UseSelectedPowerup();
-    }
-
-    private void UseSelectedPowerup()
-    {
-        HidePowerupSelectionUI(); 
-        gameManager.UsePowerup(powerupIndexSelected);
-        powerupIndexSelected = 0;
-    }
-
-    private void HidePowerupSelectionUI()
-    {
-        powerupButton1.SetActive(false);
-        powerupButton2.SetActive(false);
-        powerupButton3.SetActive(false);
-        isSelectingPowerup = false;
     }
 }

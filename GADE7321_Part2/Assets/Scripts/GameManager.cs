@@ -1,28 +1,88 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public bool turn = true; // Player 1's turn
-
+    public bool skipTurnPowerUp = false;
+    private bool player1SkipUsed = false; // Track if Player 1 has used their skip
+    private bool player2SkipUsed = false; // Track if Player 2 has used their skip
+    private bool player1PowerPuckUsed = false; // Track if Player 1 has used their PowerPuck
+    private bool player2PowerPuckUsed = false; // Track if Player 2 has used their PowerPuck
+    public bool powerPuckActive = false; // Power-up to spawn PowerPuck
     private int[,] boardState;
     private int heightOfBoard = 12;
     private int lengthOfBoard = 12;
+    private GameObject[,] boardStateObjects; // To keep track of the GameObject instances
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                if (turn == true && player1PowerPuckUsed == false)
+                {
+                    powerPuckActive = true;
+                    player1PowerPuckUsed = true;
+                    Debug.Log("Player 1 activated PowerPuck power-up");
+                }
+                else if (turn == false && player2PowerPuckUsed == false)
+                {
+                    powerPuckActive = true;
+                    player2PowerPuckUsed = true;
+                    Debug.Log("Player 2 activated PowerPuck power-up");
+                }
+            }
+            //if 3 is pressed
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                if (turn == true && player1SkipUsed == false)
+                {
+                    turn = false;
+                    player1SkipUsed = true;
+                    Debug.Log("Player 1 has skipped their turn");
+                }
+                //If it's Player 2's turn and they haven't used their skip yet
+                else if (turn == false && player2SkipUsed == false)
+                {
+                    turn = true;
+                    player2SkipUsed = true;
+                    Debug.Log("Player 2 has skipped their turn");
+                }
+            }
+        }
+        private void ClearRow(int row)
+        {
+            Debug.Log($"Clearing row {row}");
+            for (int i = 0; i < lengthOfBoard; i++)
+            {
+               
+                Destroy(boardStateObjects[i, row]);
+                
+                boardStateObjects[i, row] = null;
+                
+                boardState[i, row] = 0;
+            }
+        }
 
-    // Power-up tracking
-    private int[] player1Powerups = { 1, 1, 1 }; 
-    private int[] player2Powerups = { 1, 1, 1 }; 
+        private void Start()
+        {
+            boardState = new int[lengthOfBoard, heightOfBoard];
+            boardStateObjects = new GameObject[lengthOfBoard, heightOfBoard];
+        }
+        public void AddPuckToBoardStateObjects(int column, GameObject puck)
+        {
+            for (int row = 0; row < heightOfBoard; row++)
+            {
+                if (boardStateObjects[column, row] == null)
+                {
+                    boardStateObjects[column, row] = puck;
+                    Debug.Log($"Added puck to boardStateObjects at column {column}, row {row}");
+                    break;
+                }
+            }
+        }
 
-    private bool isPowerUpSelected = false;
-    private int selectedPowerup = 0; 
-    public int ColumnIndex; // Assuming Spawning sets this when a puck lands
-
-    private void Start()
-    {
-        boardState = new int[lengthOfBoard, heightOfBoard];
-    }
 
     public bool IsColumnFull(int column)
     {
@@ -36,14 +96,30 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
-    public bool UpdateBoardState(int column)
+    public bool UpdateBoardState(int column, bool wasPowerPuckActive)
     {
+        Debug.Log(powerPuckActive);
         for (int row = 0; row < heightOfBoard; row++)
         {
             if (boardState[column, row] == 0)
             {
-                boardState[column, row] = turn ? 1 : 2;
-                return true;
+                Debug.Log($"Updating board state at column {column}, row {row}");
+
+                Debug.Log($"powerPuckActive: {powerPuckActive}"); 
+
+                if (wasPowerPuckActive)
+                {
+                    Debug.Log("PowerPuck spawned and clearing row!"); 
+                    boardState[column, row] = 3; 
+                    ClearRow(row);
+                    powerPuckActive = false;
+                    return true;
+                }
+                else
+                {
+                    boardState[column, row] = turn ? 1 : 2;
+                    return true;
+                }
             }
         }
         return false;
@@ -57,18 +133,18 @@ public class GameManager : MonoBehaviour
             Debug.Log($"Player {currentPlayer} wins!");
         }
     }
+
     private bool CheckWinConditionForPlayer(int player)
     {
         // Check horizontal wins
-        for (int x = 0; x < lengthOfBoard - 4; x++) // Changed from -3 to -4
+        for (int x = 0; x < lengthOfBoard - 3; x++)
         {
             for (int y = 0; y < heightOfBoard; y++)
             {
                 if (boardState[x, y] == player &&
                     boardState[x + 1, y] == player &&
                     boardState[x + 2, y] == player &&
-                    boardState[x + 3, y] == player && 
-                    boardState[x + 4, y] == player)  // Check for 5 in a row
+                    boardState[x + 3, y] == player)
                 {
                     return true;
                 }
@@ -78,13 +154,12 @@ public class GameManager : MonoBehaviour
         // Check vertical wins
         for (int x = 0; x < lengthOfBoard; x++)
         {
-            for (int y = 0; y < heightOfBoard - 4; y++) // Changed from -3 to -4
+            for (int y = 0; y < heightOfBoard - 3; y++)
             {
                 if (boardState[x, y] == player &&
                     boardState[x, y + 1] == player &&
                     boardState[x, y + 2] == player &&
-                    boardState[x, y + 3] == player &&
-                    boardState[x, y + 4] == player) // Check for 5 in a row
+                    boardState[x, y + 3] == player)
                 {
                     return true;
                 }
@@ -92,15 +167,14 @@ public class GameManager : MonoBehaviour
         }
 
         // Check diagonal wins (top-left to bottom-right)
-        for (int x = 0; x < lengthOfBoard - 4; x++) // Changed from -3 to -4
+        for (int x = 0; x < lengthOfBoard - 3; x++)
         {
-            for (int y = 0; y < heightOfBoard - 4; y++) // Changed from -3 to -4
+            for (int y = 0; y < heightOfBoard - 3; y++)
             {
                 if (boardState[x, y] == player &&
                     boardState[x + 1, y + 1] == player &&
                     boardState[x + 2, y + 2] == player &&
-                    boardState[x + 3, y + 3] == player &&
-                    boardState[x + 4, y + 4] == player) // Check for 5 in a row
+                    boardState[x + 3, y + 3] == player)
                 {
                     return true;
                 }
@@ -108,15 +182,14 @@ public class GameManager : MonoBehaviour
         }
 
         // Check diagonal wins (bottom-left to top-right)
-        for (int x = 0; x < lengthOfBoard - 4; x++)  // Changed from -3 to -4
+        for (int x = 0; x < lengthOfBoard - 3; x++)
         {
-            for (int y = 4; y < heightOfBoard; y++) // Changed from 3 to 4
+            for (int y = 3; y < heightOfBoard; y++)
             {
                 if (boardState[x, y] == player &&
                     boardState[x + 1, y - 1] == player &&
                     boardState[x + 2, y - 2] == player &&
-                    boardState[x + 3, y - 3] == player &&
-                    boardState[x + 4, y - 4] == player) // Check for 5 in a row
+                    boardState[x + 3, y - 3] == player)
                 {
                     return true;
                 }
@@ -125,7 +198,10 @@ public class GameManager : MonoBehaviour
 
         // No win condition found
         return false;
-    }public int GetCurrentPlayer()
+    }
+
+
+    public int GetCurrentPlayer()
     {
         return turn ? 1 : 2;
     }
@@ -133,110 +209,5 @@ public class GameManager : MonoBehaviour
     public void SwitchTurns()
     {
         turn = !turn;
-    }
-
-    public void UsePowerup(int powerupIndex) 
-    {
-        if (!turn || isPowerUpSelected) return;
-
-        int[] currentPlayerPowerups = turn ? player1Powerups : player2Powerups;
-        if (currentPlayerPowerups[powerupIndex - 1] > 0)
-        {
-            isPowerUpSelected = true;
-            selectedPowerup = powerupIndex;
-            currentPlayerPowerups[powerupIndex - 1]--; 
-        }
-    }
-    public bool GetCurrentPlayerHasPowerups()
-    {
-        int[] currentPlayerPowerups = turn ? player1Powerups : player2Powerups;
-        return currentPlayerPowerups.Any(count => count > 0);
-    }
-
-    public void EndTurn()
-    {
-        if (isPowerUpSelected)
-        {
-            ExecutePowerup();
-        } else
-        {
-            CheckWinCondition();
-            SwitchTurns();
-        }
-    }
-
-    private void ExecutePowerup()
-    {
-        switch (selectedPowerup)
-        {
-            case 1: 
-                DeleteHorizontalRow(GetAffectedRow());
-                break;
-            case 2:
-                DeleteVerticalColumn(GetAffectedColumn());
-                break;
-            case 3:
-                // Do nothing, turn is skipped
-                break;
-            default: 
-                Debug.LogError("Invalid power-up selection");
-                break;
-        }
-        isPowerUpSelected = false; 
-        selectedPowerup = 0;
-        SwitchTurns(); 
-    }
-
-    private void DeleteHorizontalRow(int rowToDelete)
-    {
-        if (rowToDelete >= 0)
-        {
-            for (int x = 0; x < lengthOfBoard; x++)
-            {
-                boardState[x, rowToDelete] = 0;
-            }
-
-            for (int x = 0; x < lengthOfBoard; x++)
-            {
-                ShiftColumnDown(x, rowToDelete);
-            }
-        }
-    }
-
-    private void DeleteVerticalColumn(int colToDelete)
-    {
-        if (colToDelete >= 0)
-        {
-            for (int y = 0; y < heightOfBoard; y++)
-            {
-                boardState[colToDelete, y] = 0;
-            }
-        }
-    }
-
-    private int GetAffectedColumn() 
-    {
-        return ColumnIndex; 
-    }
-
-    private int GetAffectedRow()
-    {
-        for (int y = heightOfBoard - 1; y >= 0; y--)
-        {
-            if (boardState[GetAffectedColumn(), y] == 0)
-            {
-                return y; 
-            }
-        }
-        return -1; 
-    }
-
-    private void ShiftColumnDown(int column, int deletedRow)
-    {
-        for (int y = deletedRow; y > 0; y--)
-        {
-            boardState[column, y] = boardState[column, y - 1];
-        }
-        boardState[column, 0] = 0; 
     }
 }
