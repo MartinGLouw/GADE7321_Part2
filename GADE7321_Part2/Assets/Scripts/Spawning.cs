@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using Unity.UI;
 
 public class Spawning : MonoBehaviour
 {
@@ -11,15 +14,39 @@ public class Spawning : MonoBehaviour
     public GameObject puckred;
     public GameObject PowerPuck;
     public GameManager gameManager;
-
+public TextMeshProUGUI playerTurnText;
     private bool isSpawning = false;
     private float spawnCooldown = 1.0f;
+
+    public void Start()
+    {
+        playerTurnText.text = "Player 1's turn";
+    }
 
     private void OnMouseDown()
     {
         if (!isSpawning && !gameManager.IsColumnFull(ColumnIndex)) 
         {
+            
             StartCoroutine(SpawnColumn());
+            SwitchTurns();
+        }
+
+        
+    }
+    
+    public void SwitchTurns()
+    {
+        
+
+        // Update the Text element to display whose turn it is
+        if (gameManager.turn)
+        {
+            playerTurnText.text = "Player 1's turn";
+        }
+        else
+        {
+            playerTurnText.text = "Player 2's turn";
         }
     }
 
@@ -31,6 +58,10 @@ public class Spawning : MonoBehaviour
         GameObject puckToSpawn = gameManager.powerPuckActive ? PowerPuck : (gameManager.GetCurrentPlayer() == 1 ? puckblue : puckred);
         GameObject newPuck = Instantiate(puckToSpawn, SpawnPoint.transform.position, Quaternion.identity);
 
+        // Add the new puck to the gameManager's boardStateObjects
+        gameManager.AddPuckToBoardStateObjects(ColumnIndex, newPuck);
+
+    
         // Add the new puck to the gameManager's boardStateObjects
         gameManager.AddPuckToBoardStateObjects(ColumnIndex, newPuck);
         bool wasPowerPuckActive = gameManager.powerPuckActive;
