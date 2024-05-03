@@ -1,54 +1,65 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public bool turn = true; // Player 1's turn
+    public bool turn = true; 
     public bool skipTurnPowerUp = false;
-    private bool player1SkipUsed = false; // Track if Player 1 has used their skip
-    private bool player2SkipUsed = false; // Track if Player 2 has used their skip
+    private bool player1SkipUsed = false; 
+    private bool player2SkipUsed = false; 
 
-    public bool powerPuckActive = false; // Power-up to spawn PowerPuck
+    public bool powerPuckActive = false; 
     private int[,] boardState;
     private int heightOfBoard = 12;
     private int lengthOfBoard = 12;
-    public bool clearColumnPowerUp = false; // Power-up to clear a column
-    private bool player1PowerPuckUsed = false; // Track if Player 1 has used their PowerPuck
-    private bool player2PowerPuckUsed = false; // Track if Player 2 has used their PowerPuck
-    private bool player1ClearColumnUsed = false; // Track if Player 1 has used their Clear Column power-up
-    private bool player2ClearColumnUsed = false; // Track if Player 2 has used their Clear Column power-up
-    private GameObject[,] boardStateObjects; // To keep track of the GameObject instances
-
+    public bool clearColumnPowerUp = false; 
+    private bool player1PowerPuckUsed = false; 
+    private bool player2PowerPuckUsed = false; 
+    private bool player1ClearColumnUsed = false; 
+    private bool player2ClearColumnUsed = false; 
+    private GameObject[,] boardStateObjects; 
+    public TextMeshProUGUI WinText;
+    public GameObject WinImage;
+    public GameObject P1DH;
+    public GameObject P2DH;
+    public GameObject P1DC;
+    public GameObject P2DC;
+    public GameObject P1S;
+    public GameObject P2S;
     public void Update()
     {
-        // If 1 is pressed and the current player hasn't used their PowerPuck yet, activate PowerPuck power-up
+        
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             if (turn == true && player1PowerPuckUsed == false)
             {
+                P1DH.SetActive(false);
                 powerPuckActive = true;
                 player1PowerPuckUsed = true;
             }
             else if (turn == false && player2PowerPuckUsed == false)
             {
+                P2DH.SetActive(false);
                 powerPuckActive = true;
                 player2PowerPuckUsed = true;
             }
         }
 
-        //if 3 is pressed
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             if (turn == true && player1SkipUsed == false)
             {
+                P1S.SetActive(false);
                 turn = false;
                 player1SkipUsed = true;
             }
-            //If it's Player 2's turn and they haven't used their skip yet
+          
             else if (turn == false && player2SkipUsed == false)
             {
+                P2S.SetActive(false);
                 turn = true;
                 player2SkipUsed = true;
             }
@@ -58,11 +69,13 @@ public class GameManager : MonoBehaviour
         {
             if (turn == true && player1ClearColumnUsed == false)
             {
+                P1DC.SetActive(false);
                 clearColumnPowerUp = true;
                 player1ClearColumnUsed = true;
             }
             else if (turn == false && player2ClearColumnUsed == false)
             {
+                P2DC.SetActive(false);
                 clearColumnPowerUp = true;
                 player2ClearColumnUsed = true;
             }
@@ -119,20 +132,18 @@ public class GameManager : MonoBehaviour
         {
             if (boardState[column, row] == 0)
             {
-                // If PowerPuck power-up is active, spawn PowerPuck and clear the row
                 if (wasPowerPuckActive)
                 {
-                    boardState[column, row] = 3; // Assuming 3 represents a PowerPuck
+                    boardState[column, row] = 3; 
                     ClearRow(row);
                     powerPuckActive = false;
                     return true;
                 }
-                // If Clear Column power-up is active, clear the column
                 else if (clearColumnPowerUp)
                 {
                     ClearColumn(column);
                     clearColumnPowerUp = false;
-                    return false; // Return false because no puck is placed
+                    return false; 
                 }
                 else
                 {
@@ -149,12 +160,12 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < heightOfBoard; i++)
         {
-            // Destroy the GameObject in the scene
+           
             Destroy(boardStateObjects[column, i]);
-            // Clear the reference in the array
+
             boardStateObjects[column, i] = null;
-            // Clear the board state
-            boardState[column, i] = 0; // Assuming 0 represents an empty space
+
+            boardState[column, i] = 0; 
         }
     }
 
@@ -163,13 +174,15 @@ public class GameManager : MonoBehaviour
         int currentPlayer = turn ? 1 : 2;
         if (CheckWinConditionForPlayer(currentPlayer))
         {
+            WinImage.SetActive(true);
+            WinText.text = $"Player {currentPlayer} wins!";
             Debug.Log($"Player {currentPlayer} wins!");
         }
     }
 
     private bool CheckWinConditionForPlayer(int player)
 {
-    // Check horizontal wins
+    //Check horizontal wins
     for (int x = 0; x < lengthOfBoard - 4; x++)
     {
         for (int y = 0; y < heightOfBoard; y++)
@@ -185,7 +198,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Check vertical wins
+    //Check vertical wins
     for (int x = 0; x < lengthOfBoard; x++)
     {
         for (int y = 0; y < heightOfBoard - 4; y++)
@@ -201,7 +214,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Check diagonal wins (top-left to bottom-right)
+    //Check diagonal wins (top-left to bottom-right)
     for (int x = 0; x < lengthOfBoard - 4; x++)
     {
         for (int y = 0; y < heightOfBoard - 4; y++)
@@ -217,7 +230,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Check diagonal wins (bottom-left to top-right)
+    //Check diagonal wins (bottom-left to top-right)
     for (int x = 0; x < lengthOfBoard - 4; x++)
     {
         for (int y = 4; y < heightOfBoard; y++)
@@ -233,7 +246,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // No win condition found
+    //No win condition found
     return false;
 }
 
