@@ -19,4 +19,14 @@ public class SceneLoading : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void LoadEasy()
+    {
+        SceneManager.LoadScene("SPEasy");
+    }
+
+    public void LoadHard()
+    {
+        SceneManager.LoadScene("SPHard");
+    }
 }

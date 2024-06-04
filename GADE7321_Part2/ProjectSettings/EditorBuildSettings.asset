@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PVPScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/SPEasy.unity
+    guid: 5689fde30af55bf4aad76a102fd3afb5
+  - enabled: 1
+    path: Assets/Scenes/SPHard.unity
+    guid: 76b9d44818f0db84e8cda7ce05adc180
   m_configObjects: {}
