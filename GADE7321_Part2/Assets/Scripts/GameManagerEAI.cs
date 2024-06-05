@@ -1,17 +1,13 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
+using System.Linq; // For AI column selection
 using TMPro;
 using UnityEngine;
-
-
-public class GameManager : MonoBehaviour
+public class GameManagerEAI : MonoBehaviour
 {
     public bool turn = true;
     public bool skipTurnPowerUp = false;
     private bool player1SkipUsed = false;
     private bool player2SkipUsed = false;
-
     public bool powerPuckActive = false;
     private int[,] boardState;
     private int heightOfBoard = 12;
@@ -22,7 +18,6 @@ public class GameManager : MonoBehaviour
     private bool player1ClearColumnUsed = false;
     private bool player2ClearColumnUsed = false;
     private GameObject[,] boardStateObjects;
-    public TextMeshProUGUI WinText;
     public GameObject WinImage;
     public GameObject P1DH;
     public GameObject P2DH;
@@ -30,6 +25,8 @@ public class GameManager : MonoBehaviour
     public GameObject P2DC;
     public GameObject P1S;
     public GameObject P2S;
+
+    public GameObject puckPrefab;
 
     public void Update()
     {
@@ -81,16 +78,17 @@ public class GameManager : MonoBehaviour
                 player2ClearColumnUsed = true;
             }
         }
+        if (!turn)
+        {
+            StartCoroutine(AIPlay());
+        }
     }
-
     private void ClearRow(int row)
     {
         for (int i = 0; i < lengthOfBoard; i++)
         {
             Destroy(boardStateObjects[i, row]);
-
             boardStateObjects[i, row] = null;
-
             boardState[i, row] = 0;
         }
     }
@@ -123,10 +121,8 @@ public class GameManager : MonoBehaviour
                 return false;
             }
         }
-
         return true;
     }
-
     public bool UpdateBoardState(int column, bool wasPowerPuckActive)
     {
         for (int row = 0; row < heightOfBoard; row++)
@@ -169,13 +165,44 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // ... (win condition methods, AI methods, and other game logic)
+
+    public IEnumerator AIPlay()
+    {
+        yield return new WaitForSeconds(1f); // Simulate thinking time
+
+        int columnToPlay = ChooseAIColumn();
+
+        // Find the Spawning script for the chosen column
+        Spawning spawningScript = FindObjectsOfType<Spawning>()
+            .FirstOrDefault(s => s.ColumnIndex == columnToPlay);
+
+        if (spawningScript != null)
+        {
+            spawningScript.StartCoroutine(spawningScript.SpawnColumn()); // Start spawning in the chosen column
+        }
+        else
+        {
+            Debug.LogError($"No spawning script found for column {columnToPlay}");
+        }
+
+        SwitchTurns();
+    }
+    private int ChooseAIColumn()
+    {
+        // This is a placeholder AI implementation - you'll need to replace it with your actual AI logic
+        var availableColumns = Enumerable.Range(0, lengthOfBoard).Where(c => !IsColumnFull(c)).ToList();
+        return availableColumns[Random.Range(0, availableColumns.Count)];
+    }
+
     public void CheckWinCondition()
     {
         int currentPlayer = turn ? 1 : 2;
         if (CheckWinConditionForPlayer(currentPlayer))
         {
+            Spawning spawning;
             WinImage.SetActive(true);
-            WinText.text = $"Player {currentPlayer} wins!";
+           
             Debug.Log($"Player {currentPlayer} wins!");
         }
     }
