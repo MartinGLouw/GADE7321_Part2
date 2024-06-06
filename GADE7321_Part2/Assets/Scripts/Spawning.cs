@@ -14,7 +14,7 @@ public class Spawning : MonoBehaviour
     public GameObject puckred;
     public GameObject PowerPuck;
     public GameManager gameManager;
-    public GameManagerEAI gameManagerEAI;
+    public GameManager gameManagerEAI;
     public TextMeshProUGUI playerTurnText;
     private bool isSpawning = false;
     private float spawnCooldown = 1.0f;
