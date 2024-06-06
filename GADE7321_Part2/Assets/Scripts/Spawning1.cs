@@ -1,62 +1,111 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using Unity.UI;
 
 public class Spawning1 : MonoBehaviour
 {
-    public GameObject Column;
-    public int ColumnIndex;
-    public GameObject SpawnPoint;
-    public GameObject puckblue;
-    public GameObject puckred;
-    public GameObject PowerPuck;
-    public GameManagerEAI gameManagerEAI;
+    public GameObject puckBlue;
+    public GameObject puckRed;
+    public GameObject powerPuck;
+    public GameManagerEAI gameManager;
     public TextMeshProUGUI playerTurnText;
-    private bool isSpawning = false;
+    public float aiTurnDelay = 1.0f; 
+
+    // Array of Transform references for spawn positions (set in the Unity Inspector)
+    public Transform[] spawnPoints;
+
     private float spawnCooldown = 1.0f;
-    public void Start()
+    private bool isSpawning = false;
+    private int columnIndex; // Add this line
+
+    private int currentPlayer = 1;
+    private bool isTurnActive = false;
+
+    private void Start()
     {
+        // Determine the column index based on position in the spawnPoints array.
+        for (int i = 0; i < spawnPoints.Length; i++)
+        {
+            if (spawnPoints[i] == transform) // Check if this spawn point is the one we're attached to.
+            {
+                columnIndex = 1;
+                break;
+            }
+        }
+
         playerTurnText.text = "Player 1's turn";
+        StartCoroutine(ManageTurns()); 
     }
+
     private void OnMouseDown()
     {
-        if (!isSpawning && !gameManagerEAI.IsColumnFull(ColumnIndex))
+        if (currentPlayer == 1 && !isSpawning && !gameManager.IsColumnFull(columnIndex)) 
         {
-            StartCoroutine(SpawnColumn());
-            SwitchTurns();
+            StartCoroutine(SpawnColumn(columnIndex)); 
         }
     }
-    public void SwitchTurns()
+
+    private IEnumerator ManageTurns()
     {
-        // Update the Text element to display whose turn it is
-        if (gameManagerEAI.turn)
+        while (true)
         {
-            playerTurnText.text = "Player 1's turn";
-        }
-        else
-        {
-            playerTurnText.text = "Player 2's turn";
+            // Activate the turn for the current player
+            isTurnActive = true;
+            
+            if (currentPlayer == 2)
+            {
+                yield return new WaitForSeconds(aiTurnDelay); 
+
+                int randomColumnIndex;
+                do
+                {
+                    randomColumnIndex = Random.Range(0, spawnPoints.Length);
+                } while (gameManager.IsColumnFull(randomColumnIndex));
+
+                StartCoroutine(SpawnColumn(randomColumnIndex)); 
+            }
+            
+            // Wait until the turn is complete (puck is spawned and processed)
+            yield return new WaitUntil(() => !isTurnActive);
+
+            // Switch to the next player
+            currentPlayer = (currentPlayer == 1) ? 2 : 1;
+
+            // Update UI for the next player's turn
+            if (currentPlayer == 1)
+            {
+                playerTurnText.text = "Player 1's turn";
+            }
+            else
+            {
+                playerTurnText.text = "Player 2's (AI) turn";
+            }
+
+            // Update power-up UI elements (same as before)
         }
     }
-    public IEnumerator SpawnColumn()
+
+    private IEnumerator SpawnColumn(int columnIndex)
     {
         isSpawning = true;
-        GameObject puckToSpawn = gameManagerEAI.powerPuckActive
-            ? PowerPuck
-            : (gameManagerEAI.GetCurrentPlayer() == 1 ? puckblue : puckred);
-        GameObject newPuck = Instantiate(puckToSpawn, SpawnPoint.transform.position, Quaternion.identity);
-        gameManagerEAI.AddPuckToBoardStateObjects(ColumnIndex, newPuck);
-        gameManagerEAI.AddPuckToBoardStateObjects(ColumnIndex, newPuck);
-        bool wasPowerPuckActive = gameManagerEAI.powerPuckActive;
-        gameManagerEAI.powerPuckActive = false;
-        if (gameManagerEAI.UpdateBoardState(ColumnIndex, wasPowerPuckActive))
+
+        GameObject puckToSpawn = gameManager.powerPuckActive
+            ? powerPuck
+            : (gameManager.GetCurrentPlayer() == 1 ? puckBlue : puckRed);
+        GameObject newPuck = Instantiate(puckToSpawn, spawnPoints[columnIndex].position, Quaternion.identity); 
+        gameManager.AddPuckToBoardStateObjects(columnIndex, newPuck);
+
+        bool wasPowerPuckActive = gameManager.powerPuckActive;
+        gameManager.powerPuckActive = false;
+
+        if (gameManager.UpdateBoardState(columnIndex, wasPowerPuckActive))
         {
-            gameManagerEAI.CheckWinCondition();
-            gameManagerEAI.SwitchTurns();
+            gameManager.CheckWinCondition();
+            gameManager.SwitchTurns();
         }
+
+        isTurnActive = false; // Mark the turn as complete after spawning
+
         yield return new WaitForSeconds(spawnCooldown);
         isSpawning = false;
     }
