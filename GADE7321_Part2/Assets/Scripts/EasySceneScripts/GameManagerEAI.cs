@@ -254,6 +254,7 @@ public class GameManagerEAI : MonoBehaviour
     public int GetCurrentPlayer()
     {
         return turn ? 1 : 2;
+        
     }
 
     public void SwitchTurns()
