@@ -62,12 +62,15 @@ public class MinMaxSpawning : MonoBehaviour
 
     private IEnumerator DelayThenSwitchTurns()
     {
-        yield return new WaitForSeconds(1.0f); //Wait for 1 second
+        yield return new WaitForSeconds(1.0f); 
         gameManagerHard.SwitchTurns();
-        SwitchTurns();
-        if (gameManagerHard.GetCurrentPlayer() == 2)
+        SwitchTurns(); 
+
+        if (!gameManagerHard.turn) //Check if it's AI turn
         {
-            StartCoroutine(SpawnColumn(GetRandomAvailableColumn())); //Don't pass a spawn point for the AI
+            int enemyColumnIndex = gameManagerHard.GetRandomAvailableColumn(); 
+            GameObject enemySpawnPoint = spawnPointsPosition[enemyColumnIndex].gameObject;
+            StartCoroutine(SpawnColumn(enemyColumnIndex, enemySpawnPoint)); 
         }
     }
 

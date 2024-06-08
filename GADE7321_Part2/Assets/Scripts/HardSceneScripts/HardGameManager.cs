@@ -175,7 +175,7 @@ public class HardGameManager : MonoBehaviour
     public void CheckWinCondition()
     {
         int currentPlayer = turn ? 1 : 2;
-        if (CheckWinConditionForPlayer(currentPlayer))
+        if (CheckWinConditionForPlayer(currentPlayer,5))
         {
             WinImage.SetActive(true);
             WinText.text = $"Player {currentPlayer} wins!";
@@ -183,7 +183,7 @@ public class HardGameManager : MonoBehaviour
         }
     }
 
-    private bool CheckWinConditionForPlayer(int player)
+    /*private bool CheckWinConditionForPlayer(int player)
     {
         const int CONNECT_LENGTH = 5;
 
@@ -265,7 +265,7 @@ public class HardGameManager : MonoBehaviour
 
         //No win condition found
         return false;
-    }
+    }*/
 
     public int GetCurrentPlayer()
     {
@@ -277,14 +277,14 @@ public class HardGameManager : MonoBehaviour
         turn = !turn;
     }
 
-    private int GetRandomAvailableColumn()
+    public int GetRandomAvailableColumn()
     {
         return Minimax(boardState, MAX_DEPTH, AI_PLAYER).Item1; //Get the best column from minimax
     }
 
     private (int, int) Minimax(int[,] board, int depth, int player)
     {
-        if (depth == 0 || CheckWinConditionForPlayer(player) || IsBoardFull(board))
+        if (depth == 0 || CheckWinConditionForPlayer(player,5) || IsBoardFull(board))
         {
             return (-1, EvaluateBoard(board, AI_PLAYER)); //Return score and fake column for nodes
         }
@@ -313,12 +313,12 @@ public class HardGameManager : MonoBehaviour
 
     private int EvaluateBoard(int[,] board, int player)
     {
-        //Enhanced evaluation function for Connect 5
+        
         int opponent = 3 - player;
 
         //Check for immediate wins/losses
-        if (CheckWinConditionForPlayer(player)) return 10000;
-        if (CheckWinConditionForPlayer(opponent)) return -10000;
+        if (CheckWinConditionForPlayer(player,5)) return 10000;
+        if (CheckWinConditionForPlayer(opponent,5)) return -10000;
 
         int score = 0;
 
@@ -331,7 +331,7 @@ public class HardGameManager : MonoBehaviour
         }
 
         //Potential winning lines
-        score += CountPotentialLines(board, player, WIN_LENGTH) * 1000; // Prioritize 5-in-a-row threats
+        score += CountPotentialLines(board, player, WIN_LENGTH) * 1000; //Prioritize 5-in-a-row
         score += CountPotentialLines(board, player, 4) * 100;
         score += CountPotentialLines(board, player, 3) * 10;
         score += CountPotentialLines(board, player, 2);
@@ -370,15 +370,106 @@ public class HardGameManager : MonoBehaviour
     private int CountPotentialLines(int[,] board, int player, int length)
     {
         int count = 0;
-        // Check horizontal, vertical, and diagonal lines
+        int opponent = 3 - player;
+
+        //Check horizontal lines
         for (int row = 0; row < heightOfBoard; row++)
+        {
+            for (int col = 0; col <= lengthOfBoard - length; col++)
+            {
+                count += EvaluateLine(board, row, col, 0, 1, length, player, opponent);
+            }
+        }
+    
+        //Check vertical lines
+        for (int row = 0; row <= heightOfBoard - length; row++)
         {
             for (int col = 0; col < lengthOfBoard; col++)
             {
-                // ... (Check for potential lines of 'length' for the given player)
+                count += EvaluateLine(board, row, col, 1, 0, length, player, opponent);
             }
         }
 
+        //Check diagonal lines (top-left to bottom-right)
+        for (int row = 0; row <= heightOfBoard - length; row++)
+        {
+            for (int col = 0; col <= lengthOfBoard - length; col++)
+            {
+                count += EvaluateLine(board, row, col, 1, 1, length, player, opponent);
+            }
+        }
+    
+        //Check diagonal lines (top-right to bottom-left)
+        for (int row = 0; row <= heightOfBoard - length; row++)
+        {
+            for (int col = length - 1; col < lengthOfBoard; col++)
+            {
+                count += EvaluateLine(board, row, col, 1, -1, length, player, opponent);
+            }
+        }
         return count;
+    }
+    private int EvaluateLine(int[,] board, int row, int col, int rowIncrement, int colIncrement, int length, int player, int opponent)
+    {
+        int countPlayer = 0, countOpponent = 0, countEmpty = 0;
+        for (int i = 0; i < length; i++)
+        {
+            int r = row + i * rowIncrement;
+            int c = col + i * colIncrement;
+            if (board[c, r] == player) countPlayer++;
+            else if (board[c, r] == opponent) countOpponent++;
+            else countEmpty++;
+        }
+    
+        
+        
+        if (countPlayer > 0 && countOpponent == 0)
+        {
+            
+            return countPlayer * countPlayer; 
+        }
+        else if (countOpponent > 0 && countPlayer == 0)
+        {
+            
+            return -countOpponent * countOpponent; 
+        }
+
+        return 0; //No potential for either player
+    }
+    private bool CheckWinConditionForPlayer(int player, int connectLength)
+    {
+        //Horizontal
+        for (int y = 0; y < heightOfBoard; y++)
+        for (int x = 0; x <= lengthOfBoard - connectLength; x++)
+            if (CheckLine(x, y, 1, 0, connectLength, player)) return true;
+
+        //Vertical
+        for (int x = 0; x < lengthOfBoard; x++)
+        for (int y = 0; y <= heightOfBoard - connectLength; y++)
+            if (CheckLine(x, y, 0, 1, connectLength, player)) return true;
+
+        //Diagonal (top-left to bottom-right)
+        for (int x = 0; x <= lengthOfBoard - connectLength; x++)
+        for (int y = 0; y <= heightOfBoard - connectLength; y++)
+            if (CheckLine(x, y, 1, 1, connectLength, player)) return true;
+
+        //Diagonal (bottom-left to top-right)
+        for (int x = 0; x <= lengthOfBoard - connectLength; x++)
+        for (int y = connectLength - 1; y < heightOfBoard; y++)
+            if (CheckLine(x, y, 1, -1, connectLength, player)) return true;
+
+        return false; //No win condition
+    }
+
+    private bool CheckLine(int x, int y, int dx, int dy, int length, int player)
+    {
+        for (int i = 0; i < length; i++)
+        {
+            if (x + i * dx < 0 || x + i * dx >= lengthOfBoard || y + i * dy < 0 || y + i * dy >= heightOfBoard || boardState[x + i * dx, y + i * dy] != player)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
