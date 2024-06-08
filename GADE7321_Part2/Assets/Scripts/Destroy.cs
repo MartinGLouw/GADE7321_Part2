@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Destroy : MonoBehaviour
 {
-    //destroy the oject after 2 seconds
+    //destroy the object after 2 seconds
     void Start()
     {
         Destroy(gameObject, 2);

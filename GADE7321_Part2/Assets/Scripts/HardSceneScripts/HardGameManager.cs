@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-
 public class HardGameManager : MonoBehaviour
 {
     public bool turn = true;
@@ -30,6 +29,11 @@ public class HardGameManager : MonoBehaviour
     public GameObject P2DC;
     public GameObject P1S;
     public GameObject P2S;
+
+    private const int AI_PLAYER = 2;
+    private const int HUMAN_PLAYER = 1;
+    private const int MAX_DEPTH = 4;
+    private const int WIN_LENGTH = 5;
 
     public void Update()
     {
@@ -113,7 +117,6 @@ public class HardGameManager : MonoBehaviour
         }
     }
 
-
     public bool IsColumnFull(int column)
     {
         for (int row = 0; row < heightOfBoard; row++)
@@ -182,67 +185,81 @@ public class HardGameManager : MonoBehaviour
 
     private bool CheckWinConditionForPlayer(int player)
     {
-        //Check horizontal wins
-        for (int x = 0; x < lengthOfBoard - 4; x++)
+        const int CONNECT_LENGTH = 5;
+
+        //Horizontal win
+        for (int y = 0; y < heightOfBoard; y++)
         {
-            for (int y = 0; y < heightOfBoard; y++)
+            for (int x = 0; x <= lengthOfBoard - CONNECT_LENGTH; x++) //check if space left
             {
-                if (boardState[x, y] == player &&
-                    boardState[x + 1, y] == player &&
-                    boardState[x + 2, y] == player &&
-                    boardState[x + 3, y] == player &&
-                    boardState[x + 4, y] == player)
+                bool win = true;
+                for (int i = 0; i < CONNECT_LENGTH; i++) // Check consecutive pieces
                 {
-                    return true;
+                    if (boardState[x + i, y] != player)
+                    {
+                        win = false;
+                        break;
+                    }
                 }
+
+                if (win) return true; //win
             }
         }
 
         //Check vertical wins
         for (int x = 0; x < lengthOfBoard; x++)
         {
-            for (int y = 0; y < heightOfBoard - 4; y++)
+            for (int y = 0; y <= heightOfBoard - CONNECT_LENGTH; y++) 
             {
-                if (boardState[x, y] == player &&
-                    boardState[x, y + 1] == player &&
-                    boardState[x, y + 2] == player &&
-                    boardState[x, y + 3] == player &&
-                    boardState[x, y + 4] == player)
+                bool win = true;
+                for (int i = 0; i < CONNECT_LENGTH; i++)
                 {
-                    return true;
+                    if (boardState[x, y + i] != player)
+                    {
+                        win = false;
+                        break;
+                    }
                 }
+
+                if (win) return true;
             }
         }
 
         //Check diagonal wins (top-left to bottom-right)
-        for (int x = 0; x < lengthOfBoard - 4; x++)
+        for (int x = 0; x <= lengthOfBoard - CONNECT_LENGTH; x++)
         {
-            for (int y = 0; y < heightOfBoard - 4; y++)
+            for (int y = 0; y <= heightOfBoard - CONNECT_LENGTH; y++)
             {
-                if (boardState[x, y] == player &&
-                    boardState[x + 1, y + 1] == player &&
-                    boardState[x + 2, y + 2] == player &&
-                    boardState[x + 3, y + 3] == player &&
-                    boardState[x + 4, y + 4] == player)
+                bool win = true;
+                for (int i = 0; i < CONNECT_LENGTH; i++)
                 {
-                    return true;
+                    if (boardState[x + i, y + i] != player)
+                    {
+                        win = false;
+                        break;
+                    }
                 }
+
+                if (win) return true;
             }
         }
 
         //Check diagonal wins (bottom-left to top-right)
-        for (int x = 0; x < lengthOfBoard - 4; x++)
+        for (int x = 0; x <= lengthOfBoard - CONNECT_LENGTH; x++)
         {
-            for (int y = 4; y < heightOfBoard; y++)
+            for (int y = CONNECT_LENGTH - 1; y < heightOfBoard; y++)
             {
-                if (boardState[x, y] == player &&
-                    boardState[x + 1, y - 1] == player &&
-                    boardState[x + 2, y - 2] == player &&
-                    boardState[x + 3, y - 3] == player &&
-                    boardState[x + 4, y - 4] == player)
+                bool win = true;
+                for (int i = 0; i < CONNECT_LENGTH; i++)
                 {
-                    return true;
+                    if (boardState[x + i, y - i] != player)
+                    {
+                        win = false;
+                        break;
+                    }
                 }
+
+                if (win) return true;
             }
         }
 
@@ -250,15 +267,118 @@ public class HardGameManager : MonoBehaviour
         return false;
     }
 
-
     public int GetCurrentPlayer()
     {
         return turn ? 1 : 2;
-        
     }
 
     public void SwitchTurns()
     {
         turn = !turn;
+    }
+
+    private int GetRandomAvailableColumn()
+    {
+        return Minimax(boardState, MAX_DEPTH, AI_PLAYER).Item1; //Get the best column from minimax
+    }
+
+    private (int, int) Minimax(int[,] board, int depth, int player)
+    {
+        if (depth == 0 || CheckWinConditionForPlayer(player) || IsBoardFull(board))
+        {
+            return (-1, EvaluateBoard(board, AI_PLAYER)); //Return score and fake column for nodes
+        }
+
+        int bestScore = (player == AI_PLAYER) ? int.MinValue : int.MaxValue;
+        int bestCol = -1;
+
+        for (int col = 0; col < lengthOfBoard; col++)
+        {
+            if (!IsColumnFull(col))
+            {
+                int[,] newBoard = (int[,])board.Clone();
+                DropPuck(newBoard, col, player);
+                int score = Minimax(newBoard, depth - 1, 3 - player).Item2;
+
+                if ((player == AI_PLAYER && score > bestScore) || (player == HUMAN_PLAYER && score < bestScore))
+                {
+                    bestScore = score;
+                    bestCol = col;
+                }
+            }
+        }
+
+        return (bestCol, bestScore);
+    }
+
+    private int EvaluateBoard(int[,] board, int player)
+    {
+        //Enhanced evaluation function for Connect 5
+        int opponent = 3 - player;
+
+        //Check for immediate wins/losses
+        if (CheckWinConditionForPlayer(player)) return 10000;
+        if (CheckWinConditionForPlayer(opponent)) return -10000;
+
+        int score = 0;
+
+        //Center control
+        int centerCol = lengthOfBoard / 2;
+        for (int row = 0; row < heightOfBoard; row++)
+        {
+            if (board[centerCol, row] == player) score += 3;
+            if (board[centerCol, row] == opponent) score -= 3;
+        }
+
+        //Potential winning lines
+        score += CountPotentialLines(board, player, WIN_LENGTH) * 1000; // Prioritize 5-in-a-row threats
+        score += CountPotentialLines(board, player, 4) * 100;
+        score += CountPotentialLines(board, player, 3) * 10;
+        score += CountPotentialLines(board, player, 2);
+
+        //Blocking opponent's moves
+        score -= CountPotentialLines(board, opponent, WIN_LENGTH) * 900;
+        score -= CountPotentialLines(board, opponent, 4) * 90;
+        score -= CountPotentialLines(board, opponent, 3) * 9;
+        score -= CountPotentialLines(board, opponent, 2);
+
+        return score;
+    }
+
+    private void DropPuck(int[,] board, int column, int player)
+    {
+        for (int row = 0; row < heightOfBoard; row++)
+        {
+            if (board[column, row] == 0)
+            {
+                board[column, row] = player;
+                break;
+            }
+        }
+    }
+
+    private bool IsBoardFull(int[,] board)
+    {
+        for (int col = 0; col < lengthOfBoard; col++)
+        {
+            if (!IsColumnFull(col)) return false;
+        }
+
+        return true;
+    }
+
+    private int CountPotentialLines(int[,] board, int player, int length)
+    {
+        int count = 0;
+        // Check horizontal, vertical, and diagonal lines
+        for (int row = 0; row < heightOfBoard; row++)
+        {
+            for (int col = 0; col < lengthOfBoard; col++)
+            {
+                // ... (Check for potential lines of 'length' for the given player)
+            }
+        }
+
+        return count;
     }
 }

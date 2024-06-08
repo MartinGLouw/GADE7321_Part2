@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 9621999}
   m_Layer: 0
   m_Name: Spawn (6)
-  m_TagString: Untagged
+  m_TagString: Spawnpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -307,7 +307,7 @@ GameObject:
   m_Component:
   - component: {fileID: 95503595}
   - component: {fileID: 95503597}
-  - component: {fileID: 95503596}
+  - component: {fileID: 95503598}
   m_Layer: 0
   m_Name: Column (6)
   m_TagString: Untagged
@@ -330,26 +330,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1928117993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &95503596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 95503594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33261c600c444fb47a940e04aceb3244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Column: {fileID: 95503594}
-  ColumnIndex: 6
-  SpawnPoint: {fileID: 9621998}
-  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
-  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
-  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
-  gameManager: {fileID: 149765452}
-  playerTurnText: {fileID: 1747885130}
 --- !u!65 &95503597
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -371,6 +351,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 10.71, z: 1}
   m_Center: {x: 0, y: 0.39, z: 0}
+--- !u!114 &95503598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95503594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 791eb5f002e3fd8448639c693dd7a280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Column: {fileID: 95503594}
+  ColumnIndex: 6
+  SpawnPoint: {fileID: 9621998}
+  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
+  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
+  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
+  gameManagerHard: {fileID: 149765454}
+  playerTurnText: {fileID: 1747885130}
+  spawnPoints: []
+  spawnPointsPosition: []
 --- !u!1 &100577524
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,7 +493,7 @@ GameObject:
   m_Component:
   - component: {fileID: 134286206}
   - component: {fileID: 134286208}
-  - component: {fileID: 134286207}
+  - component: {fileID: 134286209}
   m_Layer: 0
   m_Name: Column (7)
   m_TagString: Untagged
@@ -514,26 +516,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1928117993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &134286207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 134286205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33261c600c444fb47a940e04aceb3244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Column: {fileID: 134286205}
-  ColumnIndex: 7
-  SpawnPoint: {fileID: 586908385}
-  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
-  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
-  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
-  gameManager: {fileID: 149765452}
-  playerTurnText: {fileID: 1747885130}
 --- !u!65 &134286208
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -555,6 +537,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 10.71, z: 1}
   m_Center: {x: 0, y: 0.39, z: 0}
+--- !u!114 &134286209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134286205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 791eb5f002e3fd8448639c693dd7a280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Column: {fileID: 134286205}
+  ColumnIndex: 7
+  SpawnPoint: {fileID: 586908385}
+  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
+  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
+  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
+  gameManagerHard: {fileID: 149765454}
+  playerTurnText: {fileID: 1747885130}
+  spawnPoints: []
+  spawnPointsPosition: []
 --- !u!1 &149765451
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,7 +568,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 149765453}
-  - component: {fileID: 149765452}
+  - component: {fileID: 149765454}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -572,30 +576,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &149765452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 149765451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33810bd15540a874781cb9ae6b42a45b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turn: 1
-  skipTurnPowerUp: 0
-  powerPuckActive: 0
-  clearColumnPowerUp: 0
-  WinText: {fileID: 965230025}
-  WinImage: {fileID: 1713253427}
-  P1DH: {fileID: 1574995148}
-  P2DH: {fileID: 62715401}
-  P1DC: {fileID: 1882178090}
-  P2DC: {fileID: 720429641}
-  P1S: {fileID: 1932890010}
-  P2S: {fileID: 1791834764}
 --- !u!4 &149765453
 Transform:
   m_ObjectHideFlags: 0
@@ -611,6 +591,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &149765454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149765451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9e9b99fa52bc843af88bbf6279fa88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turn: 1
+  skipTurnPowerUp: 0
+  powerPuckActive: 0
+  lengthOfBoard: 12
+  clearColumnPowerUp: 0
+  WinText: {fileID: 965230025}
+  WinImage: {fileID: 1713253427}
+  P1DH: {fileID: 1574995148}
+  P2DH: {fileID: 62715401}
+  P1DC: {fileID: 1882178090}
+  P2DC: {fileID: 720429641}
+  P1S: {fileID: 1932890010}
+  P2S: {fileID: 1791834764}
 --- !u!1001 &229400081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -908,7 +913,7 @@ GameObject:
   m_Component:
   - component: {fileID: 532403939}
   - component: {fileID: 532403941}
-  - component: {fileID: 532403940}
+  - component: {fileID: 532403942}
   m_Layer: 0
   m_Name: Column (11)
   m_TagString: Untagged
@@ -931,26 +936,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1928117993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &532403940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532403938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33261c600c444fb47a940e04aceb3244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Column: {fileID: 532403938}
-  ColumnIndex: 11
-  SpawnPoint: {fileID: 2114004691}
-  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
-  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
-  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
-  gameManager: {fileID: 149765452}
-  playerTurnText: {fileID: 1747885130}
 --- !u!65 &532403941
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -972,6 +957,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 10.71, z: 1}
   m_Center: {x: 0, y: 0.39, z: 0}
+--- !u!114 &532403942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532403938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 791eb5f002e3fd8448639c693dd7a280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Column: {fileID: 532403938}
+  ColumnIndex: 11
+  SpawnPoint: {fileID: 2114004691}
+  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
+  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
+  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
+  gameManagerHard: {fileID: 149765454}
+  playerTurnText: {fileID: 1747885130}
+  spawnPoints: []
+  spawnPointsPosition: []
 --- !u!1 &535292762
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,7 +1034,7 @@ GameObject:
   - component: {fileID: 586908386}
   m_Layer: 0
   m_Name: Spawn (7)
-  m_TagString: Untagged
+  m_TagString: Spawnpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1058,7 +1065,7 @@ GameObject:
   - component: {fileID: 639900530}
   m_Layer: 0
   m_Name: Spawn (2)
-  m_TagString: Untagged
+  m_TagString: Spawnpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1164,7 +1171,7 @@ GameObject:
   - component: {fileID: 799903703}
   m_Layer: 0
   m_Name: Spawn (9)
-  m_TagString: Untagged
+  m_TagString: Spawnpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1195,7 +1202,7 @@ GameObject:
   - component: {fileID: 816816428}
   m_Layer: 0
   m_Name: Spawn (3)
-  m_TagString: Untagged
+  m_TagString: Spawnpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1493,7 +1500,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1067860853}
   - component: {fileID: 1067860855}
-  - component: {fileID: 1067860854}
+  - component: {fileID: 1067860856}
   m_Layer: 0
   m_Name: Column (10)
   m_TagString: Untagged
@@ -1516,26 +1523,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1928117993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1067860854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1067860852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33261c600c444fb47a940e04aceb3244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Column: {fileID: 1067860852}
-  ColumnIndex: 10
-  SpawnPoint: {fileID: 1236102364}
-  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
-  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
-  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
-  gameManager: {fileID: 149765452}
-  playerTurnText: {fileID: 1747885130}
 --- !u!65 &1067860855
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1557,6 +1544,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 10.71, z: 1}
   m_Center: {x: 0, y: 0.39, z: 0}
+--- !u!114 &1067860856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067860852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 791eb5f002e3fd8448639c693dd7a280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Column: {fileID: 1067860852}
+  ColumnIndex: 10
+  SpawnPoint: {fileID: 1236102364}
+  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
+  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
+  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
+  gameManagerHard: {fileID: 149765454}
+  playerTurnText: {fileID: 1747885130}
+  spawnPoints: []
+  spawnPointsPosition: []
 --- !u!1 &1117196143
 GameObject:
   m_ObjectHideFlags: 0
@@ -1611,7 +1620,7 @@ GameObject:
   - component: {fileID: 1124220182}
   m_Layer: 0
   m_Name: Spawn (5)
-  m_TagString: Untagged
+  m_TagString: Spawnpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1641,7 +1650,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1229772913}
   - component: {fileID: 1229772915}
-  - component: {fileID: 1229772914}
+  - component: {fileID: 1229772916}
   m_Layer: 0
   m_Name: Column (8)
   m_TagString: Untagged
@@ -1664,26 +1673,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1928117993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1229772914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1229772912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33261c600c444fb47a940e04aceb3244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Column: {fileID: 1229772912}
-  ColumnIndex: 8
-  SpawnPoint: {fileID: 1438323003}
-  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
-  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
-  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
-  gameManager: {fileID: 149765452}
-  playerTurnText: {fileID: 1747885130}
 --- !u!65 &1229772915
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1705,6 +1694,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 10.71, z: 1}
   m_Center: {x: 0, y: 0.39, z: 0}
+--- !u!114 &1229772916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229772912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 791eb5f002e3fd8448639c693dd7a280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Column: {fileID: 1229772912}
+  ColumnIndex: 8
+  SpawnPoint: {fileID: 1438323003}
+  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
+  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
+  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
+  gameManagerHard: {fileID: 149765454}
+  playerTurnText: {fileID: 1747885130}
+  spawnPoints: []
+  spawnPointsPosition: []
 --- !u!1 &1236102364
 GameObject:
   m_ObjectHideFlags: 0
@@ -1716,7 +1727,7 @@ GameObject:
   - component: {fileID: 1236102365}
   m_Layer: 0
   m_Name: Spawn (10)
-  m_TagString: Untagged
+  m_TagString: Spawnpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1893,7 +1904,7 @@ GameObject:
   - component: {fileID: 1312673416}
   m_Layer: 0
   m_Name: Spawn (4)
-  m_TagString: Untagged
+  m_TagString: Spawnpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1923,7 +1934,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1393743744}
   - component: {fileID: 1393743746}
-  - component: {fileID: 1393743745}
+  - component: {fileID: 1393743747}
   m_Layer: 0
   m_Name: Column
   m_TagString: Untagged
@@ -1946,26 +1957,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1928117993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1393743745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1393743743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33261c600c444fb47a940e04aceb3244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Column: {fileID: 1393743743}
-  ColumnIndex: 0
-  SpawnPoint: {fileID: 1417007575}
-  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
-  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
-  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
-  gameManager: {fileID: 149765452}
-  playerTurnText: {fileID: 1747885130}
 --- !u!65 &1393743746
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1987,6 +1978,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 10.71, z: 1}
   m_Center: {x: 0, y: 0.39, z: 0}
+--- !u!114 &1393743747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393743743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 791eb5f002e3fd8448639c693dd7a280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Column: {fileID: 1393743743}
+  ColumnIndex: 0
+  SpawnPoint: {fileID: 1417007575}
+  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
+  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
+  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
+  gameManagerHard: {fileID: 149765454}
+  playerTurnText: {fileID: 1747885130}
+  spawnPoints: []
+  spawnPointsPosition: []
 --- !u!1 &1417007575
 GameObject:
   m_ObjectHideFlags: 0
@@ -1998,7 +2011,7 @@ GameObject:
   - component: {fileID: 1417007576}
   m_Layer: 0
   m_Name: Spawn
-  m_TagString: Untagged
+  m_TagString: Spawnpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2029,7 +2042,7 @@ GameObject:
   - component: {fileID: 1438323004}
   m_Layer: 0
   m_Name: Spawn (8)
-  m_TagString: Untagged
+  m_TagString: Spawnpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2059,7 +2072,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1511749541}
   - component: {fileID: 1511749543}
-  - component: {fileID: 1511749542}
+  - component: {fileID: 1511749544}
   m_Layer: 0
   m_Name: Column (5)
   m_TagString: Untagged
@@ -2082,26 +2095,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1928117993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1511749542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1511749540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33261c600c444fb47a940e04aceb3244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Column: {fileID: 1511749540}
-  ColumnIndex: 5
-  SpawnPoint: {fileID: 1124220181}
-  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
-  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
-  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
-  gameManager: {fileID: 149765452}
-  playerTurnText: {fileID: 1747885130}
 --- !u!65 &1511749543
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2123,6 +2116,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 10.71, z: 1}
   m_Center: {x: 0, y: 0.39, z: 0}
+--- !u!114 &1511749544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511749540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 791eb5f002e3fd8448639c693dd7a280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Column: {fileID: 1511749540}
+  ColumnIndex: 5
+  SpawnPoint: {fileID: 1124220181}
+  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
+  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
+  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
+  gameManagerHard: {fileID: 149765454}
+  playerTurnText: {fileID: 1747885130}
+  spawnPoints: []
+  spawnPointsPosition: []
 --- !u!1 &1574995148
 GameObject:
   m_ObjectHideFlags: 0
@@ -2208,7 +2223,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1581262511}
   - component: {fileID: 1581262513}
-  - component: {fileID: 1581262512}
+  - component: {fileID: 1581262514}
   m_Layer: 0
   m_Name: Column (9)
   m_TagString: Untagged
@@ -2231,26 +2246,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1928117993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1581262512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1581262510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33261c600c444fb47a940e04aceb3244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Column: {fileID: 1581262510}
-  ColumnIndex: 9
-  SpawnPoint: {fileID: 799903702}
-  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
-  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
-  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
-  gameManager: {fileID: 149765452}
-  playerTurnText: {fileID: 1747885130}
 --- !u!65 &1581262513
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2272,6 +2267,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 10.71, z: 1}
   m_Center: {x: 0, y: 0.39, z: 0}
+--- !u!114 &1581262514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581262510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 791eb5f002e3fd8448639c693dd7a280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Column: {fileID: 1581262510}
+  ColumnIndex: 9
+  SpawnPoint: {fileID: 799903702}
+  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
+  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
+  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
+  gameManagerHard: {fileID: 149765454}
+  playerTurnText: {fileID: 1747885130}
+  spawnPoints: []
+  spawnPointsPosition: []
 --- !u!1 &1590101027
 GameObject:
   m_ObjectHideFlags: 0
@@ -2454,7 +2471,7 @@ GameObject:
   - component: {fileID: 1747885131}
   - component: {fileID: 1747885130}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: PlayerTurnTXT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2476,7 +2493,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -9, y: 240}
+  m_AnchoredPosition: {x: 14, y: 185}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1747885130
@@ -2855,7 +2872,7 @@ GameObject:
   - component: {fileID: 1956409398}
   m_Layer: 0
   m_Name: Spawn (1)
-  m_TagString: Untagged
+  m_TagString: Spawnpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2885,7 +2902,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1966844880}
   - component: {fileID: 1966844882}
-  - component: {fileID: 1966844881}
+  - component: {fileID: 1966844883}
   m_Layer: 0
   m_Name: Column (4)
   m_TagString: Untagged
@@ -2908,26 +2925,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1928117993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1966844881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1966844879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33261c600c444fb47a940e04aceb3244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Column: {fileID: 1966844879}
-  ColumnIndex: 4
-  SpawnPoint: {fileID: 1312673415}
-  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
-  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
-  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
-  gameManager: {fileID: 149765452}
-  playerTurnText: {fileID: 1747885130}
 --- !u!65 &1966844882
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2949,6 +2946,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 10.71, z: 1}
   m_Center: {x: 0, y: 0.39, z: 0}
+--- !u!114 &1966844883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966844879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 791eb5f002e3fd8448639c693dd7a280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Column: {fileID: 1966844879}
+  ColumnIndex: 4
+  SpawnPoint: {fileID: 1312673415}
+  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
+  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
+  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
+  gameManagerHard: {fileID: 149765454}
+  playerTurnText: {fileID: 1747885130}
+  spawnPoints: []
+  spawnPointsPosition: []
 --- !u!1 &1977683190
 GameObject:
   m_ObjectHideFlags: 0
@@ -2959,7 +2978,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1977683191}
   - component: {fileID: 1977683193}
-  - component: {fileID: 1977683192}
+  - component: {fileID: 1977683194}
   m_Layer: 0
   m_Name: Column (3)
   m_TagString: Untagged
@@ -2982,26 +3001,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1928117993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1977683192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1977683190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33261c600c444fb47a940e04aceb3244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Column: {fileID: 1977683190}
-  ColumnIndex: 3
-  SpawnPoint: {fileID: 816816427}
-  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
-  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
-  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
-  gameManager: {fileID: 149765452}
-  playerTurnText: {fileID: 1747885130}
 --- !u!65 &1977683193
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3023,6 +3022,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 10.71, z: 1}
   m_Center: {x: 0, y: 0.39, z: 0}
+--- !u!114 &1977683194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977683190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 791eb5f002e3fd8448639c693dd7a280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Column: {fileID: 1977683190}
+  ColumnIndex: 3
+  SpawnPoint: {fileID: 816816427}
+  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
+  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
+  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
+  gameManagerHard: {fileID: 149765454}
+  playerTurnText: {fileID: 1747885130}
+  spawnPoints: []
+  spawnPointsPosition: []
 --- !u!1 &2054717620
 GameObject:
   m_ObjectHideFlags: 0
@@ -3033,7 +3054,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2054717621}
   - component: {fileID: 2054717623}
-  - component: {fileID: 2054717622}
+  - component: {fileID: 2054717624}
   m_Layer: 0
   m_Name: Column (2)
   m_TagString: Untagged
@@ -3056,26 +3077,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1928117993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2054717622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2054717620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33261c600c444fb47a940e04aceb3244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Column: {fileID: 2054717620}
-  ColumnIndex: 2
-  SpawnPoint: {fileID: 639900529}
-  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
-  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
-  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
-  gameManager: {fileID: 149765452}
-  playerTurnText: {fileID: 1747885130}
 --- !u!65 &2054717623
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3097,6 +3098,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 10.71, z: 1}
   m_Center: {x: 0, y: 0.39, z: 0}
+--- !u!114 &2054717624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054717620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 791eb5f002e3fd8448639c693dd7a280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Column: {fileID: 2054717620}
+  ColumnIndex: 2
+  SpawnPoint: {fileID: 639900529}
+  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
+  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
+  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
+  gameManagerHard: {fileID: 149765454}
+  playerTurnText: {fileID: 1747885130}
+  spawnPoints: []
+  spawnPointsPosition: []
 --- !u!1 &2069855752
 GameObject:
   m_ObjectHideFlags: 0
@@ -3107,7 +3130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2069855753}
   - component: {fileID: 2069855755}
-  - component: {fileID: 2069855754}
+  - component: {fileID: 2069855756}
   m_Layer: 0
   m_Name: Column (1)
   m_TagString: Untagged
@@ -3130,26 +3153,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1928117993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2069855754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2069855752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33261c600c444fb47a940e04aceb3244, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Column: {fileID: 2069855752}
-  ColumnIndex: 1
-  SpawnPoint: {fileID: 1956409397}
-  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
-  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
-  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
-  gameManager: {fileID: 149765452}
-  playerTurnText: {fileID: 1747885130}
 --- !u!65 &2069855755
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3171,6 +3174,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 10.71, z: 1}
   m_Center: {x: 0, y: 0.39, z: 0}
+--- !u!114 &2069855756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069855752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 791eb5f002e3fd8448639c693dd7a280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Column: {fileID: 2069855752}
+  ColumnIndex: 1
+  SpawnPoint: {fileID: 1956409397}
+  puckblue: {fileID: 4816622988218850492, guid: eff28dffded7a9e4d91b6b3b0375ef24, type: 3}
+  puckred: {fileID: 4816622988218850492, guid: c9ce2800ad03a384e9cc02425a119d97, type: 3}
+  PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
+  gameManagerHard: {fileID: 149765454}
+  playerTurnText: {fileID: 1747885130}
+  spawnPoints: []
+  spawnPointsPosition: []
 --- !u!1 &2114004691
 GameObject:
   m_ObjectHideFlags: 0
@@ -3182,7 +3207,7 @@ GameObject:
   - component: {fileID: 2114004692}
   m_Layer: 0
   m_Name: Spawn (11)
-  m_TagString: Untagged
+  m_TagString: Spawnpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -13,7 +13,7 @@ public class Spawning1 : MonoBehaviour
     public GameObject PowerPuck;
     public GameManagerEAI gameManager;
     public TextMeshProUGUI playerTurnText;
-    public GameObject[] spawnPoints; // An array to hold all the spawn points
+    public GameObject[] spawnPoints; //An array to hold all the spawn points
     public Transform[] spawnPointsPosition;
 
     private bool isSpawning = false;
@@ -31,7 +31,7 @@ public class Spawning1 : MonoBehaviour
     {
         if (!isSpawning && !gameManager.IsColumnFull(ColumnIndex) && gameManager.turn) 
         {
-            StartCoroutine(SpawnColumn(ColumnIndex, SpawnPoint)); // Pass the SpawnPoint for Player 1
+            StartCoroutine(SpawnColumn(ColumnIndex, SpawnPoint)); 
         }
     }
     
@@ -41,7 +41,7 @@ public class Spawning1 : MonoBehaviour
         GameObject puckToSpawn = gameManager.powerPuckActive
             ? PowerPuck
             : (gameManager.GetCurrentPlayer() == 1 ? puckblue : puckred);
-        // use the spawnpoint that was passed in, or get a random one if none was passed (for AI)
+        
         GameObject newPuck = Instantiate(puckToSpawn, spawnPoint ? spawnPoint.transform.position : GetRandomSpawnPoint().position, Quaternion.identity); 
         gameManager.AddPuckToBoardStateObjects(columnIndex, newPuck);
         bool wasPowerPuckActive = gameManager.powerPuckActive;
@@ -60,12 +60,12 @@ public class Spawning1 : MonoBehaviour
 
     private IEnumerator DelayThenSwitchTurns()
     {
-        yield return new WaitForSeconds(1.0f); // Wait for 1 second
+        yield return new WaitForSeconds(1.0f); 
         gameManager.SwitchTurns();
         SwitchTurns();
         if (gameManager.GetCurrentPlayer() == 2)
         {
-            StartCoroutine(SpawnColumn(GetRandomAvailableColumn())); // Don't pass a spawn point for the AI
+            StartCoroutine(SpawnColumn(GetRandomAvailableColumn())); 
         }
     }
 
@@ -89,7 +89,7 @@ public class Spawning1 : MonoBehaviour
         }
         else
         {
-            return 0; // Or handle the situation as you see fit.
+            return 0; 
         }
     }
     private Transform GetRandomSpawnPoint()

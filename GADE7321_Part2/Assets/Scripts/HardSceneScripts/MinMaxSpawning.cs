@@ -13,9 +13,9 @@ public class MinMaxSpawning : MonoBehaviour
     public GameObject puckblue;
     public GameObject puckred;
     public GameObject PowerPuck;
-    public GameManagerEAI gameManager;
+    public HardGameManager gameManagerHard;
     public TextMeshProUGUI playerTurnText;
-    public GameObject[] spawnPoints; // An array to hold all the spawn points
+    public GameObject[] spawnPoints; //An array to hold all the spawn points
     public Transform[] spawnPointsPosition;
 
     private bool isSpawning = false;
@@ -25,33 +25,33 @@ public class MinMaxSpawning : MonoBehaviour
     private void Start()
     {
         spawnPointsPosition = GameObject.FindGameObjectsWithTag("Spawnpoint").Select(go => go.transform).ToArray();
-        gameManager.turn = true; 
+        gameManagerHard.turn = true; 
         SwitchTurns(); 
     }
 
     private void OnMouseDown()
     {
-        if (!isSpawning && !gameManager.IsColumnFull(ColumnIndex) && gameManager.turn) 
+        if (!isSpawning && !gameManagerHard.IsColumnFull(ColumnIndex) && gameManagerHard.turn) 
         {
-            StartCoroutine(SpawnColumn(ColumnIndex, SpawnPoint)); // Pass the SpawnPoint for Player 1
+            StartCoroutine(SpawnColumn(ColumnIndex, SpawnPoint)); 
         }
     }
     
     public IEnumerator SpawnColumn(int columnIndex, GameObject spawnPoint = null)
     {
         isSpawning = true;
-        GameObject puckToSpawn = gameManager.powerPuckActive
+        GameObject puckToSpawn = gameManagerHard.powerPuckActive
             ? PowerPuck
-            : (gameManager.GetCurrentPlayer() == 1 ? puckblue : puckred);
-        // use the spawnpoint that was passed in, or get a random one if none was passed (for AI)
+            : (gameManagerHard.GetCurrentPlayer() == 1 ? puckblue : puckred);
+        
         GameObject newPuck = Instantiate(puckToSpawn, spawnPoint ? spawnPoint.transform.position : GetRandomSpawnPoint().position, Quaternion.identity); 
-        gameManager.AddPuckToBoardStateObjects(columnIndex, newPuck);
-        bool wasPowerPuckActive = gameManager.powerPuckActive;
-        gameManager.powerPuckActive = false;
+        gameManagerHard.AddPuckToBoardStateObjects(columnIndex, newPuck);
+        bool wasPowerPuckActive = gameManagerHard.powerPuckActive;
+        gameManagerHard.powerPuckActive = false;
 
-        if (gameManager.UpdateBoardState(columnIndex, wasPowerPuckActive))
+        if (gameManagerHard.UpdateBoardState(columnIndex, wasPowerPuckActive))
         {
-            gameManager.CheckWinCondition();
+            gameManagerHard.CheckWinCondition();
         }
 
         StartCoroutine(DelayThenSwitchTurns()); 
@@ -62,23 +62,23 @@ public class MinMaxSpawning : MonoBehaviour
 
     private IEnumerator DelayThenSwitchTurns()
     {
-        yield return new WaitForSeconds(1.0f); // Wait for 1 second
-        gameManager.SwitchTurns();
+        yield return new WaitForSeconds(1.0f); //Wait for 1 second
+        gameManagerHard.SwitchTurns();
         SwitchTurns();
-        if (gameManager.GetCurrentPlayer() == 2)
+        if (gameManagerHard.GetCurrentPlayer() == 2)
         {
-            StartCoroutine(SpawnColumn(GetRandomAvailableColumn())); // Don't pass a spawn point for the AI
+            StartCoroutine(SpawnColumn(GetRandomAvailableColumn())); //Don't pass a spawn point for the AI
         }
     }
 
     private int GetRandomAvailableColumn()
     {
-        int[] availableColumns = new int[gameManager.lengthOfBoard];
+        int[] availableColumns = new int[gameManagerHard.lengthOfBoard];
         int availableCount = 0;
 
-        for (int i = 0; i < gameManager.lengthOfBoard; i++)
+        for (int i = 0; i < gameManagerHard.lengthOfBoard; i++)
         {
-            if (!gameManager.IsColumnFull(i))
+            if (!gameManagerHard.IsColumnFull(i))
             {
                 availableColumns[availableCount] = i;
                 availableCount++;
@@ -91,7 +91,7 @@ public class MinMaxSpawning : MonoBehaviour
         }
         else
         {
-            return 0; // Or handle the situation as you see fit.
+            return 0; 
         }
     }
     private Transform GetRandomSpawnPoint()
@@ -102,7 +102,7 @@ public class MinMaxSpawning : MonoBehaviour
     public void SwitchTurns()
     {
         
-        if (gameManager.turn)
+        if (gameManagerHard.turn)
         {
             playerTurnText.text = "Player 1's turn";
         }
