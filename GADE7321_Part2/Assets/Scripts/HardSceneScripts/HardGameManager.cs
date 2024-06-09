@@ -345,30 +345,7 @@ public class HardGameManager : MonoBehaviour
     public int GetRandomAvailableColumn()
     {
 
-        int[] availableColumns = new int[lengthOfBoard];
-        int availableCount = 0;
-
-        for (int i = 0; i < lengthOfBoard; i++)
-        {
-            if (!IsColumnFull(i))
-            {
-                availableColumns[availableCount] = i;
-                availableCount++;
-            }
-        }
-
-        if (availableCount > 0)
-        {
-            Debug.Log("Available count: " + availableCount); 
-            Debug.Log("Random Range: " + Random.Range(0, availableCount)); 
-            Debug.Log("AI is playing in column: " + availableColumns[Random.Range(0, availableCount)]); 
-            return availableColumns[Random.Range(0, availableCount)];
-        }
-        else
-        {
-            Debug.LogError("No valid column found!");
-            return 0; 
-        }
+        return Minimax(boardState, MAX_DEPTH, AI_PLAYER).Item1;
     }
 
     private (int, int) Minimax(int[,] board, int depth, int player)

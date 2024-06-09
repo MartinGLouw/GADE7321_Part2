@@ -24,7 +24,7 @@ public class MinMaxSpawning : MonoBehaviour
 
     private void Start()
     {
-        spawnPointsPosition = GameObject.FindGameObjectsWithTag("Spawnpoint").Select(go => go.transform).ToArray();
+        /*spawnPointsPosition = GameObject.FindGameObjectsWithTag("Spawnpoint").Select(go => go.transform).ToArray();*/
         gameManagerHard.turn = true; 
         SwitchTurns(); 
     }
@@ -40,11 +40,23 @@ public class MinMaxSpawning : MonoBehaviour
     public IEnumerator SpawnColumn(int columnIndex, GameObject spawnPoint = null)
     {
         isSpawning = true;
+
         GameObject puckToSpawn = gameManagerHard.powerPuckActive
             ? PowerPuck
             : (gameManagerHard.GetCurrentPlayer() == 1 ? puckblue : puckred);
         
-        GameObject newPuck = Instantiate(puckToSpawn, spawnPoint ? spawnPoint.transform.position : GetRandomSpawnPoint().position, Quaternion.identity); 
+        GameObject newPuck;
+        if (gameManagerHard.GetCurrentPlayer() == 1)
+        {
+            //For Player 1, use the provided spawnPoint
+            newPuck = Instantiate(puckToSpawn, spawnPoint.transform.position, Quaternion.identity);
+        }
+        else
+        {
+            //For AI, use the columnIndex to determine the spawn position from the array
+            newPuck = Instantiate(puckToSpawn, spawnPoints[columnIndex].transform.position, Quaternion.identity); 
+        }
+        
         Debug.Log("Placing puck in column: " + columnIndex);
         gameManagerHard.AddPuckToBoardStateObjects(columnIndex, newPuck);
         bool wasPowerPuckActive = gameManagerHard.powerPuckActive;
@@ -55,7 +67,7 @@ public class MinMaxSpawning : MonoBehaviour
             gameManagerHard.CheckWinCondition();
         }
 
-        StartCoroutine(DelayThenSwitchTurns()); 
+        StartCoroutine(DelayThenSwitchTurns());
 
         yield return new WaitForSeconds(spawnCooldown);
         isSpawning = false;
@@ -63,7 +75,7 @@ public class MinMaxSpawning : MonoBehaviour
 
     private IEnumerator DelayThenSwitchTurns()
     {
-        yield return new WaitForSeconds(1.0f); 
+        yield return new WaitForSeconds(1f); 
         gameManagerHard.SwitchTurns();
         SwitchTurns(); 
 
@@ -77,34 +89,8 @@ public class MinMaxSpawning : MonoBehaviour
         }
     }
 
-    private int GetRandomAvailableColumn()
-    {
-        int[] availableColumns = new int[gameManagerHard.lengthOfBoard];
-        int availableCount = 0;
-
-        for (int i = 0; i < gameManagerHard.lengthOfBoard; i++)
-        {
-            if (!gameManagerHard.IsColumnFull(i))
-            {
-                availableColumns[availableCount] = i;
-                availableCount++;
-            }
-        }
-
-        if (availableCount > 0)
-        {
-            return availableColumns[Random.Range(0, availableCount)];
-        }
-        else
-        {
-            return 0; 
-        }
-    }
-    private Transform GetRandomSpawnPoint()
-    {
-        return spawnPointsPosition[Random.Range(0, spawnPointsPosition.Length)];
-    }
-
+    
+   
     public void SwitchTurns()
     {
         
