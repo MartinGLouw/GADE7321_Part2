@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class HardGameManager : MonoBehaviour
 {
@@ -34,6 +35,8 @@ public class HardGameManager : MonoBehaviour
     private const int HUMAN_PLAYER = 1;
     private const int MAX_DEPTH = 4;
     private const int WIN_LENGTH = 5;
+    
+    
 
     public void Update()
     {
@@ -104,6 +107,8 @@ public class HardGameManager : MonoBehaviour
         boardState = new int[lengthOfBoard, heightOfBoard];
         boardStateObjects = new GameObject[lengthOfBoard, heightOfBoard];
     }
+   
+
 
     public void AddPuckToBoardStateObjects(int column, GameObject puck)
     {
@@ -132,13 +137,13 @@ public class HardGameManager : MonoBehaviour
 
     public bool UpdateBoardState(int column, bool wasPowerPuckActive)
     {
-        for (int row = 0; row < heightOfBoard; row++)
+        for (int row = 0; row < heightOfBoard; row++) // Start from the bottom row (0)
         {
-            if (boardState[column, row] == 0)
+            if (boardState[column, row] == 0) // Check if the cell is empty
             {
                 if (wasPowerPuckActive)
                 {
-                    boardState[column, row] = 3;
+                    boardState[column, row] = 3; // Power puck
                     ClearRow(row);
                     powerPuckActive = false;
                     return true;
@@ -147,17 +152,34 @@ public class HardGameManager : MonoBehaviour
                 {
                     ClearColumn(column);
                     clearColumnPowerUp = false;
-                    return false;
+                    return false; // Don't switch turns after clearing a column
                 }
                 else
                 {
-                    boardState[column, row] = turn ? 1 : 2;
-                    return true;
+                    boardState[column, row] = turn ? 1 : 2; // Place the puck
+                    return true; // Puck placed successfully
                 }
             }
         }
+    
+        DebugBoardState("Current Board:");
+        return false; // Column is full
+    }
 
-        return false;
+    private void DebugBoardState(string message = "")
+    {
+        Debug.Log(message);
+
+        string boardString = "";
+        for (int row = heightOfBoard - 1; row >= 0; row--) // Start from top row
+        {
+            for (int column = 0; column < lengthOfBoard; column++)
+            {
+                boardString += boardState[column, row] + " ";
+            }
+            boardString += "\n";
+        }
+        Debug.Log(boardString);
     }
 
     private void ClearColumn(int column)
@@ -175,98 +197,141 @@ public class HardGameManager : MonoBehaviour
     public void CheckWinCondition()
     {
         int currentPlayer = turn ? 1 : 2;
-        if (CheckWinConditionForPlayer(currentPlayer,5))
+        if (CheckWinConditionForPlayer(currentPlayer))
         {
             WinImage.SetActive(true);
             WinText.text = $"Player {currentPlayer} wins!";
             Debug.Log($"Player {currentPlayer} wins!");
         }
-    }
-
-    /*private bool CheckWinConditionForPlayer(int player)
+        Debug.Log("Checking for win");
+    } private bool CheckWinConditionForPlayer(int player)
     {
-        const int CONNECT_LENGTH = 5;
-
-        //Horizontal win
-        for (int y = 0; y < heightOfBoard; y++)
+        //Check horizontal wins
+        for (int x = 0; x < lengthOfBoard - 4; x++)
         {
-            for (int x = 0; x <= lengthOfBoard - CONNECT_LENGTH; x++) //check if space left
+            for (int y = 0; y < heightOfBoard; y++)
             {
-                bool win = true;
-                for (int i = 0; i < CONNECT_LENGTH; i++) // Check consecutive pieces
+                if (boardState[x, y] == player &&
+                    boardState[x + 1, y] == player &&
+                    boardState[x + 2, y] == player &&
+                    boardState[x + 3, y] == player &&
+                    boardState[x + 4, y] == player)
                 {
-                    if (boardState[x + i, y] != player)
-                    {
-                        win = false;
-                        break;
-                    }
+                    return true;
                 }
-
-                if (win) return true; //win
             }
         }
 
         //Check vertical wins
         for (int x = 0; x < lengthOfBoard; x++)
         {
-            for (int y = 0; y <= heightOfBoard - CONNECT_LENGTH; y++) 
+            for (int y = 0; y < heightOfBoard - 4; y++)
             {
-                bool win = true;
-                for (int i = 0; i < CONNECT_LENGTH; i++)
+                if (boardState[x, y] == player &&
+                    boardState[x, y + 1] == player &&
+                    boardState[x, y + 2] == player &&
+                    boardState[x, y + 3] == player &&
+                    boardState[x, y + 4] == player)
                 {
-                    if (boardState[x, y + i] != player)
-                    {
-                        win = false;
-                        break;
-                    }
+                    return true;
                 }
-
-                if (win) return true;
             }
         }
 
         //Check diagonal wins (top-left to bottom-right)
-        for (int x = 0; x <= lengthOfBoard - CONNECT_LENGTH; x++)
+        for (int x = 0; x < lengthOfBoard - 4; x++)
         {
-            for (int y = 0; y <= heightOfBoard - CONNECT_LENGTH; y++)
+            for (int y = 0; y < heightOfBoard - 4; y++)
             {
-                bool win = true;
-                for (int i = 0; i < CONNECT_LENGTH; i++)
+                if (boardState[x, y] == player &&
+                    boardState[x + 1, y + 1] == player &&
+                    boardState[x + 2, y + 2] == player &&
+                    boardState[x + 3, y + 3] == player &&
+                    boardState[x + 4, y + 4] == player)
                 {
-                    if (boardState[x + i, y + i] != player)
-                    {
-                        win = false;
-                        break;
-                    }
+                    return true;
                 }
-
-                if (win) return true;
             }
         }
 
         //Check diagonal wins (bottom-left to top-right)
-        for (int x = 0; x <= lengthOfBoard - CONNECT_LENGTH; x++)
+        for (int x = 0; x < lengthOfBoard - 4; x++)
         {
-            for (int y = CONNECT_LENGTH - 1; y < heightOfBoard; y++)
+            for (int y = 4; y < heightOfBoard; y++)
             {
-                bool win = true;
-                for (int i = 0; i < CONNECT_LENGTH; i++)
+                if (boardState[x, y] == player &&
+                    boardState[x + 1, y - 1] == player &&
+                    boardState[x + 2, y - 2] == player &&
+                    boardState[x + 3, y - 3] == player &&
+                    boardState[x + 4, y - 4] == player)
                 {
-                    if (boardState[x + i, y - i] != player)
-                    {
-                        win = false;
-                        break;
-                    }
+                    return true;
                 }
-
-                if (win) return true;
             }
         }
 
         //No win condition found
         return false;
+    }
+
+    /*private bool CheckWinConditionForPlayer(int player)
+    {
+        const int CONNECT_LENGTH = 5;
+
+        // Horizontal win
+        for (int y = 0; y < heightOfBoard; y++)
+        {
+            for (int x = 0; x <= lengthOfBoard - CONNECT_LENGTH; x++)
+            {
+                if (CheckLine(x, y, 1, 0, CONNECT_LENGTH, player))
+                {
+                    Debug.Log($"Horizontal win found for player");
+                    return true;
+                } 
+                // Check horizontal line
+                    
+            }
+        }
+
+        // Vertical win
+        for (int x = 0; x < lengthOfBoard; x++)
+        {
+            for (int y = 0; y <= heightOfBoard - CONNECT_LENGTH; y++)
+            {
+                if (CheckLine(x, y, 0, 1, CONNECT_LENGTH, player))
+                {
+                    return true;
+                } // Check vertical line
+                   
+            }
+        }
+
+        // Diagonal win (top-left to bottom-right)
+        for (int x = 0; x <= lengthOfBoard - CONNECT_LENGTH; x++)
+        {
+            for (int y = 0; y <= heightOfBoard - CONNECT_LENGTH; y++)
+            {
+                if (CheckLine(x, y, 1, 1, CONNECT_LENGTH, player)) // Check diagonal line
+                    return true;
+            }
+        }
+
+        // Diagonal win (bottom-left to top-right)
+        for (int x = 0; x <= lengthOfBoard - CONNECT_LENGTH; x++)
+        {
+            for (int y = CONNECT_LENGTH - 1; y < heightOfBoard; y++)
+            {
+                if (CheckLine(x, y, 1, -1, CONNECT_LENGTH, player)) // Check diagonal line
+                    return true;
+            }
+        }
+
+        // No win condition found
+        return false;
     }*/
 
+
+   
     public int GetCurrentPlayer()
     {
         return turn ? 1 : 2;
@@ -279,12 +344,36 @@ public class HardGameManager : MonoBehaviour
 
     public int GetRandomAvailableColumn()
     {
-        return Minimax(boardState, MAX_DEPTH, AI_PLAYER).Item1; //Get the best column from minimax
+
+        int[] availableColumns = new int[lengthOfBoard];
+        int availableCount = 0;
+
+        for (int i = 0; i < lengthOfBoard; i++)
+        {
+            if (!IsColumnFull(i))
+            {
+                availableColumns[availableCount] = i;
+                availableCount++;
+            }
+        }
+
+        if (availableCount > 0)
+        {
+            Debug.Log("Available count: " + availableCount); 
+            Debug.Log("Random Range: " + Random.Range(0, availableCount)); 
+            Debug.Log("AI is playing in column: " + availableColumns[Random.Range(0, availableCount)]); 
+            return availableColumns[Random.Range(0, availableCount)];
+        }
+        else
+        {
+            Debug.LogError("No valid column found!");
+            return 0; 
+        }
     }
 
     private (int, int) Minimax(int[,] board, int depth, int player)
     {
-        if (depth == 0 || CheckWinConditionForPlayer(player,5) || IsBoardFull(board))
+        if (depth == 0 || CheckWinConditionForPlayer(player) || IsBoardFull(board))
         {
             return (-1, EvaluateBoard(board, AI_PLAYER)); //Return score and fake column for nodes
         }
@@ -317,8 +406,8 @@ public class HardGameManager : MonoBehaviour
         int opponent = 3 - player;
 
         //Check for immediate wins/losses
-        if (CheckWinConditionForPlayer(player,5)) return 10000;
-        if (CheckWinConditionForPlayer(opponent,5)) return -10000;
+        if (CheckWinConditionForPlayer(player)) return 10000;
+        if (CheckWinConditionForPlayer(opponent)) return -10000;
 
         int score = 0;
 
@@ -436,7 +525,7 @@ public class HardGameManager : MonoBehaviour
 
         return 0; //No potential for either player
     }
-    private bool CheckWinConditionForPlayer(int player, int connectLength)
+    /*private bool CheckWinConditionForPlayer(int player, int connectLength)
     {
         //Horizontal
         for (int y = 0; y < heightOfBoard; y++)
@@ -459,7 +548,7 @@ public class HardGameManager : MonoBehaviour
             if (CheckLine(x, y, 1, -1, connectLength, player)) return true;
 
         return false; //No win condition
-    }
+    }*/
 
     private bool CheckLine(int x, int y, int dx, int dy, int length, int player)
     {

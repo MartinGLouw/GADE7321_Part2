@@ -45,6 +45,7 @@ public class MinMaxSpawning : MonoBehaviour
             : (gameManagerHard.GetCurrentPlayer() == 1 ? puckblue : puckred);
         
         GameObject newPuck = Instantiate(puckToSpawn, spawnPoint ? spawnPoint.transform.position : GetRandomSpawnPoint().position, Quaternion.identity); 
+        Debug.Log("Placing puck in column: " + columnIndex);
         gameManagerHard.AddPuckToBoardStateObjects(columnIndex, newPuck);
         bool wasPowerPuckActive = gameManagerHard.powerPuckActive;
         gameManagerHard.powerPuckActive = false;
@@ -70,7 +71,9 @@ public class MinMaxSpawning : MonoBehaviour
         {
             int enemyColumnIndex = gameManagerHard.GetRandomAvailableColumn(); 
             GameObject enemySpawnPoint = spawnPointsPosition[enemyColumnIndex].gameObject;
+            Debug.Log("AI placing puck in column: " + enemyColumnIndex);
             StartCoroutine(SpawnColumn(enemyColumnIndex, enemySpawnPoint)); 
+            
         }
     }
 

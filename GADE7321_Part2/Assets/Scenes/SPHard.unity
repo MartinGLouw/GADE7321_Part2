@@ -371,8 +371,32 @@ MonoBehaviour:
   PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
   gameManagerHard: {fileID: 149765454}
   playerTurnText: {fileID: 1747885130}
-  spawnPoints: []
-  spawnPointsPosition: []
+  spawnPoints:
+  - {fileID: 1417007575}
+  - {fileID: 1956409397}
+  - {fileID: 639900529}
+  - {fileID: 816816427}
+  - {fileID: 1312673415}
+  - {fileID: 1124220181}
+  - {fileID: 9621998}
+  - {fileID: 586908385}
+  - {fileID: 1438323003}
+  - {fileID: 799903702}
+  - {fileID: 1236102364}
+  - {fileID: 2114004691}
+  spawnPointsPosition:
+  - {fileID: 1417007576}
+  - {fileID: 1956409398}
+  - {fileID: 639900530}
+  - {fileID: 816816428}
+  - {fileID: 1312673416}
+  - {fileID: 1124220182}
+  - {fileID: 9621999}
+  - {fileID: 586908386}
+  - {fileID: 1438323004}
+  - {fileID: 799903703}
+  - {fileID: 1236102365}
+  - {fileID: 2114004692}
 --- !u!1 &100577524
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,8 +581,32 @@ MonoBehaviour:
   PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
   gameManagerHard: {fileID: 149765454}
   playerTurnText: {fileID: 1747885130}
-  spawnPoints: []
-  spawnPointsPosition: []
+  spawnPoints:
+  - {fileID: 1417007575}
+  - {fileID: 1956409397}
+  - {fileID: 639900529}
+  - {fileID: 816816427}
+  - {fileID: 1312673415}
+  - {fileID: 1124220181}
+  - {fileID: 9621998}
+  - {fileID: 586908385}
+  - {fileID: 1438323003}
+  - {fileID: 799903702}
+  - {fileID: 1236102364}
+  - {fileID: 2114004691}
+  spawnPointsPosition:
+  - {fileID: 1417007576}
+  - {fileID: 1956409398}
+  - {fileID: 639900530}
+  - {fileID: 816816428}
+  - {fileID: 1312673416}
+  - {fileID: 1124220182}
+  - {fileID: 9621999}
+  - {fileID: 586908386}
+  - {fileID: 1438323004}
+  - {fileID: 799903703}
+  - {fileID: 1236102365}
+  - {fileID: 2114004692}
 --- !u!1 &149765451
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,8 +1025,32 @@ MonoBehaviour:
   PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
   gameManagerHard: {fileID: 149765454}
   playerTurnText: {fileID: 1747885130}
-  spawnPoints: []
-  spawnPointsPosition: []
+  spawnPoints:
+  - {fileID: 1417007575}
+  - {fileID: 1956409397}
+  - {fileID: 639900529}
+  - {fileID: 816816427}
+  - {fileID: 1312673415}
+  - {fileID: 1124220181}
+  - {fileID: 9621998}
+  - {fileID: 586908385}
+  - {fileID: 1438323003}
+  - {fileID: 799903702}
+  - {fileID: 1236102364}
+  - {fileID: 2114004691}
+  spawnPointsPosition:
+  - {fileID: 1417007576}
+  - {fileID: 1956409398}
+  - {fileID: 639900530}
+  - {fileID: 816816428}
+  - {fileID: 1312673416}
+  - {fileID: 1124220182}
+  - {fileID: 9621999}
+  - {fileID: 586908386}
+  - {fileID: 1438323004}
+  - {fileID: 799903703}
+  - {fileID: 1236102365}
+  - {fileID: 2114004692}
 --- !u!1 &535292762
 GameObject:
   m_ObjectHideFlags: 0
@@ -1564,8 +1636,32 @@ MonoBehaviour:
   PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
   gameManagerHard: {fileID: 149765454}
   playerTurnText: {fileID: 1747885130}
-  spawnPoints: []
-  spawnPointsPosition: []
+  spawnPoints:
+  - {fileID: 1417007575}
+  - {fileID: 1956409397}
+  - {fileID: 639900529}
+  - {fileID: 816816427}
+  - {fileID: 1312673415}
+  - {fileID: 1124220181}
+  - {fileID: 9621998}
+  - {fileID: 586908385}
+  - {fileID: 1438323003}
+  - {fileID: 799903702}
+  - {fileID: 1236102364}
+  - {fileID: 2114004691}
+  spawnPointsPosition:
+  - {fileID: 1417007576}
+  - {fileID: 1956409398}
+  - {fileID: 639900530}
+  - {fileID: 816816428}
+  - {fileID: 1312673416}
+  - {fileID: 1124220182}
+  - {fileID: 9621999}
+  - {fileID: 586908386}
+  - {fileID: 1438323004}
+  - {fileID: 799903703}
+  - {fileID: 1236102365}
+  - {fileID: 2114004692}
 --- !u!1 &1117196143
 GameObject:
   m_ObjectHideFlags: 0
@@ -1714,8 +1810,32 @@ MonoBehaviour:
   PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
   gameManagerHard: {fileID: 149765454}
   playerTurnText: {fileID: 1747885130}
-  spawnPoints: []
-  spawnPointsPosition: []
+  spawnPoints:
+  - {fileID: 1417007575}
+  - {fileID: 1956409397}
+  - {fileID: 639900529}
+  - {fileID: 816816427}
+  - {fileID: 1312673415}
+  - {fileID: 1124220181}
+  - {fileID: 9621998}
+  - {fileID: 586908385}
+  - {fileID: 1438323003}
+  - {fileID: 799903702}
+  - {fileID: 1236102364}
+  - {fileID: 2114004691}
+  spawnPointsPosition:
+  - {fileID: 1417007576}
+  - {fileID: 1956409398}
+  - {fileID: 639900530}
+  - {fileID: 816816428}
+  - {fileID: 1312673416}
+  - {fileID: 1124220182}
+  - {fileID: 9621999}
+  - {fileID: 586908386}
+  - {fileID: 1438323004}
+  - {fileID: 799903703}
+  - {fileID: 1236102365}
+  - {fileID: 2114004692}
 --- !u!1 &1236102364
 GameObject:
   m_ObjectHideFlags: 0
@@ -1998,8 +2118,32 @@ MonoBehaviour:
   PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
   gameManagerHard: {fileID: 149765454}
   playerTurnText: {fileID: 1747885130}
-  spawnPoints: []
-  spawnPointsPosition: []
+  spawnPoints:
+  - {fileID: 1417007575}
+  - {fileID: 1956409397}
+  - {fileID: 639900529}
+  - {fileID: 816816427}
+  - {fileID: 1312673415}
+  - {fileID: 1124220181}
+  - {fileID: 9621998}
+  - {fileID: 586908385}
+  - {fileID: 1438323003}
+  - {fileID: 799903702}
+  - {fileID: 1236102364}
+  - {fileID: 2114004691}
+  spawnPointsPosition:
+  - {fileID: 1417007576}
+  - {fileID: 1956409398}
+  - {fileID: 639900530}
+  - {fileID: 816816428}
+  - {fileID: 1312673416}
+  - {fileID: 1124220182}
+  - {fileID: 9621999}
+  - {fileID: 586908386}
+  - {fileID: 1438323004}
+  - {fileID: 799903703}
+  - {fileID: 1236102365}
+  - {fileID: 2114004692}
 --- !u!1 &1417007575
 GameObject:
   m_ObjectHideFlags: 0
@@ -2136,8 +2280,32 @@ MonoBehaviour:
   PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
   gameManagerHard: {fileID: 149765454}
   playerTurnText: {fileID: 1747885130}
-  spawnPoints: []
-  spawnPointsPosition: []
+  spawnPoints:
+  - {fileID: 1417007575}
+  - {fileID: 1956409397}
+  - {fileID: 639900529}
+  - {fileID: 816816427}
+  - {fileID: 1312673415}
+  - {fileID: 1124220181}
+  - {fileID: 9621998}
+  - {fileID: 586908385}
+  - {fileID: 1438323003}
+  - {fileID: 799903702}
+  - {fileID: 1236102364}
+  - {fileID: 2114004691}
+  spawnPointsPosition:
+  - {fileID: 1417007576}
+  - {fileID: 1956409398}
+  - {fileID: 639900530}
+  - {fileID: 816816428}
+  - {fileID: 1312673416}
+  - {fileID: 1124220182}
+  - {fileID: 9621999}
+  - {fileID: 586908386}
+  - {fileID: 1438323004}
+  - {fileID: 799903703}
+  - {fileID: 1236102365}
+  - {fileID: 2114004692}
 --- !u!1 &1574995148
 GameObject:
   m_ObjectHideFlags: 0
@@ -2287,8 +2455,32 @@ MonoBehaviour:
   PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
   gameManagerHard: {fileID: 149765454}
   playerTurnText: {fileID: 1747885130}
-  spawnPoints: []
-  spawnPointsPosition: []
+  spawnPoints:
+  - {fileID: 1417007575}
+  - {fileID: 1956409397}
+  - {fileID: 639900529}
+  - {fileID: 816816427}
+  - {fileID: 1312673415}
+  - {fileID: 1124220181}
+  - {fileID: 9621998}
+  - {fileID: 586908385}
+  - {fileID: 1438323003}
+  - {fileID: 799903702}
+  - {fileID: 1236102364}
+  - {fileID: 2114004691}
+  spawnPointsPosition:
+  - {fileID: 1417007576}
+  - {fileID: 1956409398}
+  - {fileID: 639900530}
+  - {fileID: 816816428}
+  - {fileID: 1312673416}
+  - {fileID: 1124220182}
+  - {fileID: 9621999}
+  - {fileID: 586908386}
+  - {fileID: 1438323004}
+  - {fileID: 799903703}
+  - {fileID: 1236102365}
+  - {fileID: 2114004692}
 --- !u!1 &1590101027
 GameObject:
   m_ObjectHideFlags: 0
@@ -2966,8 +3158,32 @@ MonoBehaviour:
   PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
   gameManagerHard: {fileID: 149765454}
   playerTurnText: {fileID: 1747885130}
-  spawnPoints: []
-  spawnPointsPosition: []
+  spawnPoints:
+  - {fileID: 1417007575}
+  - {fileID: 1956409397}
+  - {fileID: 639900529}
+  - {fileID: 816816427}
+  - {fileID: 1312673415}
+  - {fileID: 1124220181}
+  - {fileID: 9621998}
+  - {fileID: 586908385}
+  - {fileID: 1438323003}
+  - {fileID: 799903702}
+  - {fileID: 1236102364}
+  - {fileID: 2114004691}
+  spawnPointsPosition:
+  - {fileID: 1417007576}
+  - {fileID: 1956409398}
+  - {fileID: 639900530}
+  - {fileID: 816816428}
+  - {fileID: 1312673416}
+  - {fileID: 1124220182}
+  - {fileID: 9621999}
+  - {fileID: 586908386}
+  - {fileID: 1438323004}
+  - {fileID: 799903703}
+  - {fileID: 1236102365}
+  - {fileID: 2114004692}
 --- !u!1 &1977683190
 GameObject:
   m_ObjectHideFlags: 0
@@ -3042,8 +3258,32 @@ MonoBehaviour:
   PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
   gameManagerHard: {fileID: 149765454}
   playerTurnText: {fileID: 1747885130}
-  spawnPoints: []
-  spawnPointsPosition: []
+  spawnPoints:
+  - {fileID: 1417007575}
+  - {fileID: 1956409397}
+  - {fileID: 639900529}
+  - {fileID: 816816427}
+  - {fileID: 1312673415}
+  - {fileID: 1124220181}
+  - {fileID: 9621998}
+  - {fileID: 586908385}
+  - {fileID: 1438323003}
+  - {fileID: 799903702}
+  - {fileID: 1236102364}
+  - {fileID: 2114004691}
+  spawnPointsPosition:
+  - {fileID: 1417007576}
+  - {fileID: 1956409398}
+  - {fileID: 639900530}
+  - {fileID: 816816428}
+  - {fileID: 1312673416}
+  - {fileID: 1124220182}
+  - {fileID: 9621999}
+  - {fileID: 586908386}
+  - {fileID: 1438323004}
+  - {fileID: 799903703}
+  - {fileID: 1236102365}
+  - {fileID: 2114004692}
 --- !u!1 &2054717620
 GameObject:
   m_ObjectHideFlags: 0
@@ -3118,8 +3358,32 @@ MonoBehaviour:
   PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
   gameManagerHard: {fileID: 149765454}
   playerTurnText: {fileID: 1747885130}
-  spawnPoints: []
-  spawnPointsPosition: []
+  spawnPoints:
+  - {fileID: 1417007575}
+  - {fileID: 1956409397}
+  - {fileID: 639900529}
+  - {fileID: 816816427}
+  - {fileID: 1312673415}
+  - {fileID: 1124220181}
+  - {fileID: 9621998}
+  - {fileID: 586908385}
+  - {fileID: 1438323003}
+  - {fileID: 799903702}
+  - {fileID: 1236102364}
+  - {fileID: 2114004691}
+  spawnPointsPosition:
+  - {fileID: 1417007576}
+  - {fileID: 1956409398}
+  - {fileID: 639900530}
+  - {fileID: 816816428}
+  - {fileID: 1312673416}
+  - {fileID: 1124220182}
+  - {fileID: 9621999}
+  - {fileID: 586908386}
+  - {fileID: 1438323004}
+  - {fileID: 799903703}
+  - {fileID: 1236102365}
+  - {fileID: 2114004692}
 --- !u!1 &2069855752
 GameObject:
   m_ObjectHideFlags: 0
@@ -3194,8 +3458,32 @@ MonoBehaviour:
   PowerPuck: {fileID: 4816622988218850492, guid: a93d30727ae92cc4883d8450d83291a0, type: 3}
   gameManagerHard: {fileID: 149765454}
   playerTurnText: {fileID: 1747885130}
-  spawnPoints: []
-  spawnPointsPosition: []
+  spawnPoints:
+  - {fileID: 1417007575}
+  - {fileID: 1956409397}
+  - {fileID: 639900529}
+  - {fileID: 816816427}
+  - {fileID: 1312673415}
+  - {fileID: 1124220181}
+  - {fileID: 9621998}
+  - {fileID: 586908385}
+  - {fileID: 1438323003}
+  - {fileID: 799903702}
+  - {fileID: 1236102364}
+  - {fileID: 2114004691}
+  spawnPointsPosition:
+  - {fileID: 1417007576}
+  - {fileID: 1956409398}
+  - {fileID: 639900530}
+  - {fileID: 816816428}
+  - {fileID: 1312673416}
+  - {fileID: 1124220182}
+  - {fileID: 9621999}
+  - {fileID: 586908386}
+  - {fileID: 1438323004}
+  - {fileID: 799903703}
+  - {fileID: 1236102365}
+  - {fileID: 2114004692}
 --- !u!1 &2114004691
 GameObject:
   m_ObjectHideFlags: 0
