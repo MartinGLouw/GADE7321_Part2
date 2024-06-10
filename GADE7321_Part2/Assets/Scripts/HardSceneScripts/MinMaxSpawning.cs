@@ -7,7 +7,7 @@ using System.Linq;
 
 public class MinMaxSpawning : MonoBehaviour
 {
-     public GameObject Column;
+    public GameObject Column;
     public int ColumnIndex;
     public GameObject SpawnPoint;
     public GameObject puckblue;
@@ -24,19 +24,18 @@ public class MinMaxSpawning : MonoBehaviour
 
     private void Start()
     {
-        /*spawnPointsPosition = GameObject.FindGameObjectsWithTag("Spawnpoint").Select(go => go.transform).ToArray();*/
-        gameManagerHard.turn = true; 
-        SwitchTurns(); 
+        gameManagerHard.turn = true;
+        SwitchTurns();
     }
 
     private void OnMouseDown()
     {
-        if (!isSpawning && !gameManagerHard.IsColumnFull(ColumnIndex) && gameManagerHard.turn) 
+        if (!isSpawning && !gameManagerHard.IsColumnFull(ColumnIndex) && gameManagerHard.turn)
         {
-            StartCoroutine(SpawnColumn(ColumnIndex, SpawnPoint)); 
+            StartCoroutine(SpawnColumn(ColumnIndex, SpawnPoint));
         }
     }
-    
+
     public IEnumerator SpawnColumn(int columnIndex, GameObject spawnPoint = null)
     {
         isSpawning = true;
@@ -44,7 +43,7 @@ public class MinMaxSpawning : MonoBehaviour
         GameObject puckToSpawn = gameManagerHard.powerPuckActive
             ? PowerPuck
             : (gameManagerHard.GetCurrentPlayer() == 1 ? puckblue : puckred);
-        
+
         GameObject newPuck;
         if (gameManagerHard.GetCurrentPlayer() == 1)
         {
@@ -54,9 +53,9 @@ public class MinMaxSpawning : MonoBehaviour
         else
         {
             //For AI, use the columnIndex to determine the spawn position from the array
-            newPuck = Instantiate(puckToSpawn, spawnPoints[columnIndex].transform.position, Quaternion.identity); 
+            newPuck = Instantiate(puckToSpawn, spawnPoints[columnIndex].transform.position, Quaternion.identity);
         }
-        
+
         Debug.Log("Placing puck in column: " + columnIndex);
         gameManagerHard.AddPuckToBoardStateObjects(columnIndex, newPuck);
         bool wasPowerPuckActive = gameManagerHard.powerPuckActive;
@@ -75,25 +74,22 @@ public class MinMaxSpawning : MonoBehaviour
 
     private IEnumerator DelayThenSwitchTurns()
     {
-        yield return new WaitForSeconds(1f); 
+        yield return new WaitForSeconds(1f);
         gameManagerHard.SwitchTurns();
-        SwitchTurns(); 
+        SwitchTurns();
 
         if (!gameManagerHard.turn) //Check if it's AI turn
         {
-            int enemyColumnIndex = gameManagerHard.GetRandomAvailableColumn(); 
+            int enemyColumnIndex = gameManagerHard.GetRandomAvailableColumn();
             GameObject enemySpawnPoint = spawnPointsPosition[enemyColumnIndex].gameObject;
             Debug.Log("AI placing puck in column: " + enemyColumnIndex);
-            StartCoroutine(SpawnColumn(enemyColumnIndex, enemySpawnPoint)); 
-            
+            StartCoroutine(SpawnColumn(enemyColumnIndex, enemySpawnPoint));
         }
     }
 
-    
-   
+
     public void SwitchTurns()
     {
-        
         if (gameManagerHard.turn)
         {
             playerTurnText.text = "Player 1's turn";
