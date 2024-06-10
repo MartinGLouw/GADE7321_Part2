@@ -2589,7 +2589,7 @@ MonoBehaviour:
   lengthOfBoard: 12
   clearColumnPowerUp: 0
   WinText: {fileID: 358295827}
-  WinImage: {fileID: 358295825}
+  WinImage: {fileID: 311361736}
   P1DH: {fileID: 512003772}
   P2DH: {fileID: 722737165}
   P1DC: {fileID: 375847414}
